@@ -1,11 +1,8 @@
 Image,Total Carbs,API,Product,Grams,Carbs
 10.jpg,57,OpenAI,granola,50,30
-10.jpg,57,OpenAI,sliced almonds,10,5
+10.jpg,57,OpenAI,sliced almonds,10,3
 10.jpg,57,OpenAI,banana,100,23
-10.jpg,57,Claude,bread,50,30
-10.jpg,57,Claude,cheese,30,1
-10.jpg,57,Claude,tomato,20,4
-10.jpg,57,Claude,lettuce,10,2
+10.jpg,57,Claude,No products identified,0,0
 10.jpg,57,Gemini,Banana,120,30
-10.jpg,57,Gemini,Granola,80,40
-10.jpg,57,Gemini,Almond Slices,10,2
+10.jpg,57,Gemini,Granola,50,30
+10.jpg,57,Gemini,Sliced Almonds,15,5

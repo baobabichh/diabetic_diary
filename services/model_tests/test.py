@@ -179,9 +179,11 @@ def process_files(image_folder, output_folder):
         # Query each API
         openai_result = query_openai(img_path, carbs_value)
         time.sleep(1)  # Rate limiting
+
+        claude_result = ""
         
-        claude_result = query_anthropic(img_path, carbs_value)
-        time.sleep(1)  # Rate limiting
+        # time.sleep(65)  # Rate limiting
+        # claude_result = query_anthropic(img_path, carbs_value)
         
         gemini_result = query_gemini(img_path, carbs_value)
         time.sleep(1)  # Rate limiting
@@ -213,8 +215,6 @@ def process_files(image_folder, output_folder):
         # Generate individual files for this image
         generate_individual_csv(file_results, os.path.join(output_folder, f"{base_name}_analysis.csv"))
         generate_individual_html(file_results, os.path.join(output_folder, f"{base_name}_analysis.html"))
-
-        time.sleep(60)  # Rate limiting
     
     # Generate summary files after all images are processed
     generate_summary_csv(all_results, os.path.join(output_folder, "summary_analysis.csv"))

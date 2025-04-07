@@ -1,9 +1,14 @@
 Image,Total Carbs,API,Product,Grams,Carbs
-2.jpg,65,OpenAI,No products identified,0,0
+2.jpg,65,OpenAI,granola,50,30
+2.jpg,65,OpenAI,fried banana,100,25
+2.jpg,65,OpenAI,soy sauce,15,1.5
+2.jpg,65,OpenAI,nori (seaweed),5,1
+2.jpg,65,OpenAI,cheese,20,0.5
+2.jpg,65,OpenAI,sausage sticks,30,0
 2.jpg,65,Claude,No products identified,0,0
 2.jpg,65,Gemini,Baked Apple,150,30
-2.jpg,65,Gemini,Granola/Muesli mixture (with flax seeds),75,40
-2.jpg,65,Gemini,Soy Sauce/Dark sauce,50,5
-2.jpg,65,Gemini,Nori Seaweed,5,1
-2.jpg,65,Gemini,Cheese slice,25,1
-2.jpg,65,Gemini,Sausage sticks,30,2
+2.jpg,65,Gemini,Granola Mix (includes flakes and seeds),75,40
+2.jpg,65,Gemini,Soy Sauce,60,6
+2.jpg,65,Gemini,Cheese,40,1
+2.jpg,65,Gemini,Seaweed,5,1
+2.jpg,65,Gemini,Smoked Sausage Sticks,30,2
