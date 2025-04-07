@@ -1,0 +1,13 @@
+Image,Total Carbs,API,Product,Grams,Carbs
+9.jpg,37,OpenAI,Lettuce,50,1
+9.jpg,37,OpenAI,Tomatoes,50,3
+9.jpg,37,OpenAI,Corn,30,7
+9.jpg,37,OpenAI,Brown rice,100,23
+9.jpg,37,OpenAI,Vegetable protein (possibly a meat substitute),100,5
+9.jpg,37,Claude,No products identified,0,0
+9.jpg,37,Gemini,Lettuce,75,3
+9.jpg,37,Gemini,Tomato,50,2
+9.jpg,37,Gemini,Corn,10,2
+9.jpg,37,Gemini,Chicken/Meat,150,0
+9.jpg,37,Gemini,Meatball/Patties,75,10
+9.jpg,37,Gemini,Buckwheat,50,20
