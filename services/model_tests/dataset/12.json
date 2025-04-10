@@ -24,7 +24,7 @@
           "carbs": 5
         },
         {
-          "name": "Tea",
+          "name": "Black Tea",
           "grams": 250,
           "carbs": 0
         }
@@ -37,28 +37,33 @@
     "result": {
       "products": [
         {
-          "name": "Salmon",
+          "name": "Salmon Sandwich",
+          "grams": 150,
+          "carbs": 20
+        },
+        {
+          "name": "Korean Carrot Salad",
           "grams": 100,
-          "carbs": 0
+          "carbs": 15
         },
         {
-          "name": "Bread",
-          "grams": 50,
-          "carbs": 25
+          "name": "Scrambled Eggs",
+          "grams": 120,
+          "carbs": 2
         },
         {
-          "name": "Scrambled eggs",
-          "grams": 80,
+          "name": "Tea",
+          "grams": 250,
           "carbs": 1
         },
         {
-          "name": "Carrot salad",
-          "grams": 50,
-          "carbs": 5
+          "name": "Coffee",
+          "grams": 30,
+          "carbs": 0.5
         }
       ]
     },
-    "total_carbs": 31,
-    "accuracy": 85.18518518518519
+    "total_carbs": 38.5,
+    "accuracy": 57.407407407407405
   }
 }

@@ -24,7 +24,7 @@
           "carbs": 1
         },
         {
-          "name": "Seaweed Sheet",
+          "name": "Seaweed",
           "grams": 5,
           "carbs": 1
         },
@@ -44,41 +44,36 @@
         {
           "name": "Baked Apple",
           "grams": 150,
-          "carbs": 25
-        },
-        {
-          "name": "Linseeds",
-          "grams": 30,
-          "carbs": 10
+          "carbs": 30
         },
         {
           "name": "Granola",
-          "grams": 50,
-          "carbs": 20
+          "grams": 80,
+          "carbs": 50
         },
         {
-          "name": "Soy sauce",
-          "grams": 30,
+          "name": "Soy Sauce",
+          "grams": 50,
+          "carbs": 5
+        },
+        {
+          "name": "Cheese",
+          "grams": 50,
           "carbs": 2
         },
         {
-          "name": "Tofu",
-          "grams": 40,
-          "carbs": 1
-        },
-        {
-          "name": "Nori seaweed",
+          "name": "Seaweed",
           "grams": 10,
-          "carbs": 1
+          "carbs": 5
         },
         {
-          "name": "Dried sausage",
-          "grams": 20,
+          "name": "Kabanos Sausage",
+          "grams": 40,
           "carbs": 1
         }
       ]
     },
-    "total_carbs": 60,
-    "accuracy": 92.3076923076923
+    "total_carbs": 93,
+    "accuracy": 56.92307692307692
   }
 }

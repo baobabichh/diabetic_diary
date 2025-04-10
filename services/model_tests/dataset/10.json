@@ -11,7 +11,7 @@
         {
           "name": "Almond Slices",
           "grams": 20,
-          "carbs": 4
+          "carbs": 2
         },
         {
           "name": "Banana",
@@ -20,30 +20,30 @@
         }
       ]
     },
-    "total_carbs": 95,
-    "accuracy": 33.33333333333334
+    "total_carbs": 93,
+    "accuracy": 36.8421052631579
   },
   "gemini": {
     "result": {
       "products": [
         {
+          "name": "Banana",
+          "grams": 120,
+          "carbs": 27
+        },
+        {
           "name": "Granola",
           "grams": 100,
-          "carbs": 60
+          "carbs": 70
         },
         {
-          "name": "Almonds",
+          "name": "Almond Slices",
           "grams": 20,
-          "carbs": 6
-        },
-        {
-          "name": "Banana",
-          "grams": 150,
-          "carbs": 36
+          "carbs": 4
         }
       ]
     },
-    "total_carbs": 102,
-    "accuracy": 21.05263157894737
+    "total_carbs": 101,
+    "accuracy": 22.807017543859658
   }
 }
