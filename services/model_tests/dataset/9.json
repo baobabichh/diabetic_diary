@@ -9,9 +9,9 @@
           "carbs": 72
         },
         {
-          "name": "Chicken",
+          "name": "Stuffed Cabbage Roll",
           "grams": 150,
-          "carbs": 0
+          "carbs": 20
         },
         {
           "name": "Meatball",
@@ -35,7 +35,7 @@
         }
       ]
     },
-    "total_carbs": 89,
+    "total_carbs": 109,
     "accuracy": 0
   },
   "gemini": {

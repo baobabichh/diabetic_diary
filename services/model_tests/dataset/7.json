@@ -4,14 +4,14 @@
     "result": {
       "products": [
         {
-          "name": "Shrimp",
-          "grams": 100,
-          "carbs": 0
-        },
-        {
           "name": "Pasta",
           "grams": 150,
           "carbs": 110
+        },
+        {
+          "name": "Shrimp",
+          "grams": 100,
+          "carbs": 0
         },
         {
           "name": "Cream Sauce",
@@ -34,7 +34,7 @@
         {
           "name": "Pasta",
           "grams": 100,
-          "carbs": 70
+          "carbs": 20
         },
         {
           "name": "Cream Sauce",
@@ -43,7 +43,7 @@
         }
       ]
     },
-    "total_carbs": 76,
-    "accuracy": 0
+    "total_carbs": 26,
+    "accuracy": 47.05882352941176
   }
 }

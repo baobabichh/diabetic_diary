@@ -16,7 +16,7 @@
         {
           "name": "Crab Sticks",
           "grams": 100,
-          "carbs": 12
+          "carbs": 15
         },
         {
           "name": "Shrimp",
@@ -30,8 +30,8 @@
         }
       ]
     },
-    "total_carbs": 104,
-    "accuracy": 34.920634920634924
+    "total_carbs": 107,
+    "accuracy": 30.158730158730165
   },
   "gemini": {
     "result": {

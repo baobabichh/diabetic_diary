@@ -2,8 +2,8 @@
   "total_images": 12,
   "processed_images": 12,
   "average_accuracy": {
-    "openai": 32.11543192865032,
-    "gemini": 43.49911635906796
+    "openai": 29.954252464839282,
+    "gemini": 47.42068498651894
   },
   "accuracy_by_image": {
     "dataset/1": {
@@ -11,7 +11,7 @@
       "gemini": 16.666666666666657
     },
     "dataset/10": {
-      "openai": 33.33333333333334,
+      "openai": 28.070175438596493,
       "gemini": 21.05263157894737
     },
     "dataset/11": {
@@ -27,11 +27,11 @@
       "gemini": 92.3076923076923
     },
     "dataset/3": {
-      "openai": 15.909090909090907,
+      "openai": 0,
       "gemini": 0
     },
     "dataset/4": {
-      "openai": 34.920634920634924,
+      "openai": 30.158730158730165,
       "gemini": 84.12698412698413
     },
     "dataset/5": {
@@ -44,7 +44,7 @@
     },
     "dataset/7": {
       "openai": 0,
-      "gemini": 0
+      "gemini": 47.05882352941176
     },
     "dataset/8": {
       "openai": 0,

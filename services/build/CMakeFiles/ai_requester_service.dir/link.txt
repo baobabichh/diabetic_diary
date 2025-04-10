@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/ai_requester_service.dir/ai_requester_service/ai_requester_service.cpp.o -o ai_requester_service  -Wl,-rpath,/home/goshan9/diabetic_diary/services/../libs/ai_requester_lib/build /home/goshan9/diabetic_diary/services/../libs//ai_requester_lib/build/libai_requester_lib.so 

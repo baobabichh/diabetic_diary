@@ -1,3 +1,0 @@
-/home/goshan9/diabetic_diary/services/build/CMakeFiles/ai_requester_service.dir
-/home/goshan9/diabetic_diary/services/build/CMakeFiles/edit_cache.dir
-/home/goshan9/diabetic_diary/services/build/CMakeFiles/rebuild_cache.dir
