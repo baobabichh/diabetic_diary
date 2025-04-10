@@ -1,0 +1,79 @@
+{
+  "true_carbs": 37,
+  "openai": {
+    "result": {
+      "products": [
+        {
+          "name": "Buckwheat",
+          "grams": 100,
+          "carbs": 72
+        },
+        {
+          "name": "Chicken",
+          "grams": 150,
+          "carbs": 0
+        },
+        {
+          "name": "Meatball",
+          "grams": 100,
+          "carbs": 5
+        },
+        {
+          "name": "Lettuce",
+          "grams": 50,
+          "carbs": 2
+        },
+        {
+          "name": "Tomato",
+          "grams": 50,
+          "carbs": 4
+        },
+        {
+          "name": "Corn",
+          "grams": 30,
+          "carbs": 6
+        }
+      ]
+    },
+    "total_carbs": 89,
+    "accuracy": 0
+  },
+  "gemini": {
+    "result": {
+      "products": [
+        {
+          "name": "Chicken Breast",
+          "grams": 150,
+          "carbs": 0
+        },
+        {
+          "name": "Buckwheat",
+          "grams": 100,
+          "carbs": 20
+        },
+        {
+          "name": "Cutlets",
+          "grams": 100,
+          "carbs": 10
+        },
+        {
+          "name": "Lettuce",
+          "grams": 100,
+          "carbs": 2
+        },
+        {
+          "name": "Tomatoes",
+          "grams": 50,
+          "carbs": 5
+        },
+        {
+          "name": "Corn",
+          "grams": 20,
+          "carbs": 4
+        }
+      ]
+    },
+    "total_carbs": 41,
+    "accuracy": 89.1891891891892
+  }
+}

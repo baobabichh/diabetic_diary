@@ -1,0 +1,58 @@
+{
+  "total_images": 12,
+  "processed_images": 12,
+  "average_accuracy": {
+    "openai": 32.11543192865032,
+    "gemini": 43.49911635906796
+  },
+  "accuracy_by_image": {
+    "dataset/1": {
+      "openai": 0,
+      "gemini": 16.666666666666657
+    },
+    "dataset/10": {
+      "openai": 33.33333333333334,
+      "gemini": 21.05263157894737
+    },
+    "dataset/11": {
+      "openai": 77.77777777777777,
+      "gemini": 85.18518518518519
+    },
+    "dataset/12": {
+      "openai": 81.48148148148148,
+      "gemini": 85.18518518518519
+    },
+    "dataset/2": {
+      "openai": 52.30769230769231,
+      "gemini": 92.3076923076923
+    },
+    "dataset/3": {
+      "openai": 15.909090909090907,
+      "gemini": 0
+    },
+    "dataset/4": {
+      "openai": 34.920634920634924,
+      "gemini": 84.12698412698413
+    },
+    "dataset/5": {
+      "openai": 0,
+      "gemini": 0
+    },
+    "dataset/6": {
+      "openai": 89.65517241379311,
+      "gemini": 48.275862068965516
+    },
+    "dataset/7": {
+      "openai": 0,
+      "gemini": 0
+    },
+    "dataset/8": {
+      "openai": 0,
+      "gemini": 0
+    },
+    "dataset/9": {
+      "openai": 0,
+      "gemini": 89.1891891891892
+    }
+  }
+}

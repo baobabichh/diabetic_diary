@@ -1,0 +1,49 @@
+{
+  "true_carbs": 44,
+  "openai": {
+    "result": {
+      "products": [
+        {
+          "name": "Grilled Chicken",
+          "grams": 150,
+          "carbs": 0
+        },
+        {
+          "name": "Spaghetti",
+          "grams": 200,
+          "carbs": 62
+        },
+        {
+          "name": "Corn",
+          "grams": 100,
+          "carbs": 19
+        }
+      ]
+    },
+    "total_carbs": 81,
+    "accuracy": 15.909090909090907
+  },
+  "gemini": {
+    "result": {
+      "products": [
+        {
+          "name": "Spaghetti",
+          "grams": 150,
+          "carbs": 75
+        },
+        {
+          "name": "Chicken",
+          "grams": 150,
+          "carbs": 0
+        },
+        {
+          "name": "Corn",
+          "grams": 100,
+          "carbs": 20
+        }
+      ]
+    },
+    "total_carbs": 95,
+    "accuracy": 0
+  }
+}

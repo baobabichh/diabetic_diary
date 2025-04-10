@@ -1,0 +1,84 @@
+{
+  "true_carbs": 65,
+  "openai": {
+    "result": {
+      "products": [
+        {
+          "name": "Granola",
+          "grams": 100,
+          "carbs": 64
+        },
+        {
+          "name": "Baked Apple",
+          "grams": 150,
+          "carbs": 25
+        },
+        {
+          "name": "Soy Sauce",
+          "grams": 30,
+          "carbs": 3
+        },
+        {
+          "name": "Cheese",
+          "grams": 50,
+          "carbs": 1
+        },
+        {
+          "name": "Seaweed Sheet",
+          "grams": 5,
+          "carbs": 1
+        },
+        {
+          "name": "Sausage Sticks",
+          "grams": 40,
+          "carbs": 2
+        }
+      ]
+    },
+    "total_carbs": 96,
+    "accuracy": 52.30769230769231
+  },
+  "gemini": {
+    "result": {
+      "products": [
+        {
+          "name": "Baked Apple",
+          "grams": 150,
+          "carbs": 25
+        },
+        {
+          "name": "Linseeds",
+          "grams": 30,
+          "carbs": 10
+        },
+        {
+          "name": "Granola",
+          "grams": 50,
+          "carbs": 20
+        },
+        {
+          "name": "Soy sauce",
+          "grams": 30,
+          "carbs": 2
+        },
+        {
+          "name": "Tofu",
+          "grams": 40,
+          "carbs": 1
+        },
+        {
+          "name": "Nori seaweed",
+          "grams": 10,
+          "carbs": 1
+        },
+        {
+          "name": "Dried sausage",
+          "grams": 20,
+          "carbs": 1
+        }
+      ]
+    },
+    "total_carbs": 60,
+    "accuracy": 92.3076923076923
+  }
+}

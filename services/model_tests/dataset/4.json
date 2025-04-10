@@ -1,0 +1,69 @@
+{
+  "true_carbs": 63,
+  "openai": {
+    "result": {
+      "products": [
+        {
+          "name": "Granola",
+          "grams": 100,
+          "carbs": 64
+        },
+        {
+          "name": "Baked Apple",
+          "grams": 150,
+          "carbs": 25
+        },
+        {
+          "name": "Crab Sticks",
+          "grams": 100,
+          "carbs": 12
+        },
+        {
+          "name": "Shrimp",
+          "grams": 50,
+          "carbs": 1
+        },
+        {
+          "name": "Sausage Sticks",
+          "grams": 50,
+          "carbs": 2
+        }
+      ]
+    },
+    "total_carbs": 104,
+    "accuracy": 34.920634920634924
+  },
+  "gemini": {
+    "result": {
+      "products": [
+        {
+          "name": "Crab sticks",
+          "grams": 100,
+          "carbs": 5
+        },
+        {
+          "name": "Shrimp",
+          "grams": 100,
+          "carbs": 1
+        },
+        {
+          "name": "Sausage",
+          "grams": 50,
+          "carbs": 2
+        },
+        {
+          "name": "Granola",
+          "grams": 100,
+          "carbs": 20
+        },
+        {
+          "name": "Baked Apple",
+          "grams": 150,
+          "carbs": 25
+        }
+      ]
+    },
+    "total_carbs": 53,
+    "accuracy": 84.12698412698413
+  }
+}

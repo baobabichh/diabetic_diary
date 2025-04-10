@@ -1,0 +1,49 @@
+{
+  "true_carbs": 57,
+  "openai": {
+    "result": {
+      "products": [
+        {
+          "name": "Granola",
+          "grams": 100,
+          "carbs": 64
+        },
+        {
+          "name": "Almond Slices",
+          "grams": 20,
+          "carbs": 4
+        },
+        {
+          "name": "Banana",
+          "grams": 120,
+          "carbs": 27
+        }
+      ]
+    },
+    "total_carbs": 95,
+    "accuracy": 33.33333333333334
+  },
+  "gemini": {
+    "result": {
+      "products": [
+        {
+          "name": "Granola",
+          "grams": 100,
+          "carbs": 60
+        },
+        {
+          "name": "Almonds",
+          "grams": 20,
+          "carbs": 6
+        },
+        {
+          "name": "Banana",
+          "grams": 150,
+          "carbs": 36
+        }
+      ]
+    },
+    "total_carbs": 102,
+    "accuracy": 21.05263157894737
+  }
+}

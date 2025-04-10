@@ -1,0 +1,49 @@
+{
+  "true_carbs": 42,
+  "openai": {
+    "result": {
+      "products": [
+        {
+          "name": "Pasta",
+          "grams": 150,
+          "carbs": 110
+        },
+        {
+          "name": "Shrimp",
+          "grams": 100,
+          "carbs": 0
+        },
+        {
+          "name": "Cream Sauce",
+          "grams": 50,
+          "carbs": 5
+        }
+      ]
+    },
+    "total_carbs": 115,
+    "accuracy": 0
+  },
+  "gemini": {
+    "result": {
+      "products": [
+        {
+          "name": "Pasta",
+          "grams": 100,
+          "carbs": 70
+        },
+        {
+          "name": "Shrimp",
+          "grams": 80,
+          "carbs": 2
+        },
+        {
+          "name": "Cream Sauce",
+          "grams": 50,
+          "carbs": 5
+        }
+      ]
+    },
+    "total_carbs": 77,
+    "accuracy": 16.666666666666657
+  }
+}
