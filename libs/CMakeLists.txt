@@ -13,4 +13,4 @@ add_library(mysharedlib STATIC ${SOURCES})
 
 target_include_directories(mysharedlib PUBLIC include)
 
-set_target_properties(mylib PROPERTIES OUTPUT_NAME "mysharedlib")
+set_target_properties(mysharedlib PROPERTIES OUTPUT_NAME "mysharedlib")
