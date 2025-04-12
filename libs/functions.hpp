@@ -68,5 +68,10 @@ std::string getCfgValue(const std::string& filename, const std::string &key)
     }
 
     nlohmann::json file_json = nlohmann::json::parse(file_str);
+    if(!file_json.contains(key) || !file_json[key].is_string())
+    {
+        return {};
+    }
+    
     return file_json[key];
 }
