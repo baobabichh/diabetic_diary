@@ -52,9 +52,9 @@ std::string getFileAsString(const std::string& path)
     return ss.str();
 }
 
-std::string getCfgValue(const std::string &key)
+std::string getCfgValue(const std::string& filename, const std::string &key)
 {
-    std::string file_str = getFileAsString("../credentials.json");
+    std::string file_str = getFileAsString(filename);
     if(file_str.empty())
     {
         Logger::getInstance().error(std::string{__FUNCTION__} + " if(file_str.empty())");
