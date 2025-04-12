@@ -13,6 +13,6 @@ class AuthenticatorController : public drogon::HttpController<AuthenticatorContr
     METHOD_ADD(AuthenticatorController::login_user, "/login_user", Get);
     METHOD_LIST_END
     
-    void register_user(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback, double p1, int p2) const;
-    void login_user(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback, double p1, int p2) const;
+    void register_user(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback) const;
+    void login_user(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback) const;
 };
