@@ -3,41 +3,50 @@
 #include <string>
 #include "functions.hpp"
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[])
+{
+    if (!Cfg::getInstance().loadFromEnv())
+    {
+        LOG_ERROR("if(!Cfg::getInstance().loadFromEnv())");
+        return 1;
+    }
 
-    const std::string filename = "../../../credentials.json";
-    const auto rabbitmq_user = getCfgValue(filename, "rabbitmq_user");
-    const auto rabbitmq_pass = getCfgValue(filename, "rabbitmq_pass");
+    const auto rabbitmq_user = Cfg::getInstance().getCfgValue("rabbitmq_user");
+    const auto rabbitmq_pass = Cfg::getInstance().getCfgValue("rabbitmq_pass");
 
-    try {
-        // Connection parameters
+    if (rabbitmq_user.empty() || rabbitmq_pass.empty())
+    {
+        LOG_ERROR("if(rabbitmq_user.empty() || rabbitmq_pass.empty())");
+        return 1;
+    }
+
+    try
+    {
         const std::string hostname = "localhost";
         const int port = 5672;
         const std::string username = rabbitmq_user;
         const std::string password = rabbitmq_pass;
         const std::string vhost = "/";
 
-        // Create a connection
-        AmqpClient::Channel::ptr_t channel = AmqpClient::Channel::Create(
-            hostname, port, username, password, vhost);
-
-        // Declare a queue
+        AmqpClient::Channel::ptr_t channel = AmqpClient::Channel::Create(hostname, port, username, password, vhost);
         std::string queue_name = "test_queue";
-        channel->DeclareQueue(queue_name, false, true, false, false);
+        while (true)
+        {
+            AmqpClient::Envelope::ptr_t envelope = channel->BasicConsumeMessage(channel->BasicConsume(queue_name, "", true, true));
 
-        // Message to publish
-        std::string message = "Hello, RabbitMQ!";
-        if (argc > 1) {
-            message = argv[1];
+            if (envelope)
+            {
+                AmqpClient::BasicMessage::ptr_t message = envelope->Message();
+                std::string body = message->Body();
+
+                std::cout << "Received message: " << body << std::endl;
+
+                channel->BasicAck(envelope);
+            }
         }
-
-        // Publish the message
-        channel->BasicPublish("", queue_name, 
-            AmqpClient::BasicMessage::Create(message));
-
-        std::cout << "Published message: " << message << std::endl;
-
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception &e)
+    {
         std::cerr << "Error: " << e.what() << std::endl;
         return 1;
     }
