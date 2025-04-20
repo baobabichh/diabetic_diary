@@ -4,46 +4,36 @@
     "result": {
       "products": [
         {
-          "name": "Pasta",
+          "name": "pasta",
           "grams": 150,
           "carbs": 110
         },
         {
-          "name": "Shrimp",
+          "name": "shrimp",
           "grams": 100,
           "carbs": 0
-        },
-        {
-          "name": "Cream Sauce",
-          "grams": 50,
-          "carbs": 5
         }
       ]
     },
-    "total_carbs": 115,
+    "total_carbs": 110,
     "accuracy": 0
   },
   "gemini": {
     "result": {
       "products": [
         {
-          "name": "Pasta",
-          "grams": 100,
-          "carbs": 70
+          "name": "pasta",
+          "grams": 150,
+          "carbs": 44
         },
         {
-          "name": "Shrimp",
-          "grams": 80,
-          "carbs": 2
-        },
-        {
-          "name": "Cream Sauce",
-          "grams": 50,
-          "carbs": 5
+          "name": "shrimp in cream sauce",
+          "grams": 120,
+          "carbs": 4
         }
       ]
     },
-    "total_carbs": 77,
-    "accuracy": 16.666666666666657
+    "total_carbs": 48,
+    "accuracy": 85.71428571428572
   }
 }

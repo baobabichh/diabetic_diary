@@ -1,0 +1,64 @@
+{
+  "true_carbs": 32,
+  "openai": {
+    "result": {
+      "products": [
+        {
+          "name": "white bread",
+          "grams": 30,
+          "carbs": 15
+        },
+        {
+          "name": "butter",
+          "grams": 10,
+          "carbs": 0
+        },
+        {
+          "name": "red caviar",
+          "grams": 20,
+          "carbs": 1
+        },
+        {
+          "name": "cucumber",
+          "grams": 50,
+          "carbs": 2
+        },
+        {
+          "name": "scrambled eggs",
+          "grams": 100,
+          "carbs": 2
+        },
+        {
+          "name": "green tea",
+          "grams": 250,
+          "carbs": 0
+        }
+      ]
+    },
+    "total_carbs": 20,
+    "accuracy": 62.5
+  },
+  "gemini": {
+    "result": {
+      "products": [
+        {
+          "name": "Toast with butter and red caviar",
+          "grams": 120,
+          "carbs": 20
+        },
+        {
+          "name": "Cucumber slices",
+          "grams": 80,
+          "carbs": 2
+        },
+        {
+          "name": "Scrambled eggs",
+          "grams": 150,
+          "carbs": 1
+        }
+      ]
+    },
+    "total_carbs": 23,
+    "accuracy": 71.875
+  }
+}

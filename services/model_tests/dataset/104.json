@@ -1,0 +1,49 @@
+{
+  "true_carbs": 42,
+  "openai": {
+    "result": {
+      "products": [
+        {
+          "name": "burger bun",
+          "grams": 70,
+          "carbs": 37
+        },
+        {
+          "name": "beef patty",
+          "grams": 150,
+          "carbs": 0
+        },
+        {
+          "name": "cheese slice",
+          "grams": 20,
+          "carbs": 1
+        },
+        {
+          "name": "lettuce",
+          "grams": 15,
+          "carbs": 1
+        },
+        {
+          "name": "sauce",
+          "grams": 30,
+          "carbs": 5
+        }
+      ]
+    },
+    "total_carbs": 44,
+    "accuracy": 95.23809523809524
+  },
+  "gemini": {
+    "result": {
+      "products": [
+        {
+          "name": "Big Mac",
+          "grams": 214,
+          "carbs": 41
+        }
+      ]
+    },
+    "total_carbs": 41,
+    "accuracy": 97.61904761904762
+  }
+}

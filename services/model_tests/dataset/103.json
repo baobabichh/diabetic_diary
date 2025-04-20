@@ -1,0 +1,39 @@
+{
+  "true_carbs": 47,
+  "openai": {
+    "result": {
+      "products": [
+        {
+          "name": "macaroni",
+          "grams": 150,
+          "carbs": 45
+        },
+        {
+          "name": "carrot",
+          "grams": 30,
+          "carbs": 2
+        }
+      ]
+    },
+    "total_carbs": 47,
+    "accuracy": 100.0
+  },
+  "gemini": {
+    "result": {
+      "products": [
+        {
+          "name": "macaroni salad",
+          "grams": 300,
+          "carbs": 42
+        },
+        {
+          "name": "shredded carrots",
+          "grams": 50,
+          "carbs": 5
+        }
+      ]
+    },
+    "total_carbs": 47,
+    "accuracy": 100.0
+  }
+}

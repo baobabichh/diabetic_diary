@@ -4,57 +4,52 @@
     "result": {
       "products": [
         {
-          "name": "Smoked Salmon",
+          "name": "scrambled eggs",
+          "grams": 100,
+          "carbs": 1
+        },
+        {
+          "name": "smoked salmon",
           "grams": 50,
           "carbs": 0
         },
         {
-          "name": "White Bread",
+          "name": "carrot salad",
+          "grams": 80,
+          "carbs": 7
+        },
+        {
+          "name": "bread",
           "grams": 30,
           "carbs": 15
-        },
-        {
-          "name": "Scrambled Eggs",
-          "grams": 100,
-          "carbs": 2
-        },
-        {
-          "name": "Carrot Salad",
-          "grams": 50,
-          "carbs": 5
-        },
-        {
-          "name": "Black Tea",
-          "grams": 250,
-          "carbs": 0
         }
       ]
     },
-    "total_carbs": 22,
-    "accuracy": 81.48148148148148
+    "total_carbs": 23,
+    "accuracy": 85.18518518518519
   },
   "gemini": {
     "result": {
       "products": [
         {
           "name": "Salmon",
-          "grams": 100,
+          "grams": 80,
           "carbs": 0
         },
         {
           "name": "Bread",
-          "grams": 50,
-          "carbs": 25
+          "grams": 30,
+          "carbs": 15
         },
         {
           "name": "Scrambled Eggs",
-          "grams": 80,
+          "grams": 150,
           "carbs": 1
         },
         {
-          "name": "Carrot Salad",
-          "grams": 50,
-          "carbs": 5
+          "name": "Korean Carrot Salad",
+          "grams": 100,
+          "carbs": 15
         }
       ]
     },

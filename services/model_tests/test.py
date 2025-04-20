@@ -7,33 +7,25 @@ import google.generativeai as genai
 import numpy as np
 from typing import Dict, List, Any
 
-prompt ="""Analyze the food items in this image and provide a detailed nutritional report in JSON format. Split the products as much as you can. For each visible food item:
-1. Identify the name of the food
-2. Estimate the portion size in grams
-3. Calculate the carbohydrate content in grams
+prompt ="""You are a nutrition‐analysis assistant. Given any input image of foods:
 
-Format your response exactly as follows:
+1. Detect every unique food item and its weight in grams.
+2. Use surrounding and image depth to determine amount of products.
+3. Split products to the smallest parts.
+4. For each item, retrieve the standard carbohydrate content per 100 g from a reliable nutrition database. 
+5. Calculate the total carbohydrates for each item as.
+6. Output ONLY valid JSON in the following format:
+
 {
-"products": [
+  "products": [
     {
-    "name": "Product Name",
-    "grams": estimated_weight_in_grams,
-    "carbs": carbohydrate_content_in_grams
-    },
-    ...additional products as needed
-]
+      "name":    "<exact food name>",
+      "grams":   <detected weight in grams as an integer>,
+      "carbs":   <calculated total carbohydrates rounded to the nearest integer>
+    }
+  ]
 }
-
-Be as accurate and detailed as possible with your estimations. If multiple food items are present, include each as a separate entry in the products array.
-
-Example output:
-{
-"products": [
-    {"name": "Buckwheat", "grams": 150, "carbs": 164},
-    {"name": "Chicken Breast", "grams": 200, "carbs": 330},
-    {"name": "Cheese", "grams": 50, "carbs": 200}
-]
-}"""
+"""
 
 def get_value_from_cfg_file(file_path, key):
     with open(file_path, 'r') as file:
@@ -56,14 +48,14 @@ def encode_image_to_base64(image_path: str) -> str:
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode('utf-8')
 
-def get_openai_analysis(image_path: str) -> Dict[str, Any]:
+def get_openai_analysis(image_path: str, model_type: str) -> Dict[str, Any]:
     """Отправляет запрос в OpenAI и получает анализ пищи на фото."""
     # Кодируем изображение
     base64_image = encode_image_to_base64(image_path)
     
     # Формируем запрос к OpenAI
     response = openai_client.chat.completions.create(
-        model="gpt-4o",  # Используем модель с поддержкой изображений
+        model=model_type,  # Используем модель с поддержкой изображений
         temperature=0,  # Установлена температура 0 для более детерминированных ответов
         messages=[
             {
@@ -91,7 +83,7 @@ def get_openai_analysis(image_path: str) -> Dict[str, Any]:
         print(f"OpenAI вернул неверный JSON для {image_path}")
         return {"products": []}
 
-def get_gemini_analysis(image_path: str) -> Dict[str, Any]:
+def get_gemini_analysis(image_path: str, model_type: str) -> Dict[str, Any]:
     """Отправляет запрос в Gemini и получает анализ пищи на фото."""
     # Загружаем изображение для Gemini
     with open(image_path, "rb") as image_file:
@@ -99,7 +91,7 @@ def get_gemini_analysis(image_path: str) -> Dict[str, Any]:
     
     # Настраиваем модель Gemini
     model = genai.GenerativeModel(
-        model_name="gemini-1.5-flash",
+        model_name=model_type,
         generation_config={
             "response_mime_type": "application/json",
             "temperature": 0  # Установлена температура 0 для более детерминированных ответов
@@ -147,6 +139,9 @@ def main():
     # Находим все изображения в текущей директории
     folder = "dataset"
 
+    openai_model = "gpt-4o"
+    gemeni_model = "gemini-2.0-flash"
+
 # Получаем список файлов из указанной папки
     image_files = sorted(
         [f for f in os.listdir(folder) if f.endswith('.jpg') and f[:-4].isdigit()]
@@ -178,14 +173,14 @@ def main():
         
         print(f"OpenAI")
         # Получаем анализ от OpenAI
-        openai_result = get_openai_analysis(img_path)
+        openai_result = get_openai_analysis(img_path, openai_model)
         openai_carbs = calculate_total_carbs(openai_result.get("products", []))
         openai_accuracy = calculate_accuracy(true_carbs, openai_carbs)
         openai_accuracies.append(openai_accuracy)
         
         # Получаем анализ от Gemini
         print(f"Gemini")
-        gemini_result = get_gemini_analysis(img_path)
+        gemini_result = get_gemini_analysis(img_path, gemeni_model)
         gemini_carbs = calculate_total_carbs(gemini_result.get("products", []))
         gemini_accuracy = calculate_accuracy(true_carbs, gemini_carbs)
         gemini_accuracies.append(gemini_accuracy)

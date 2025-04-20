@@ -1,0 +1,64 @@
+{
+  "true_carbs": 54,
+  "openai": {
+    "result": {
+      "products": [
+        {
+          "name": "cucumber slices",
+          "grams": 50,
+          "carbs": 2
+        },
+        {
+          "name": "scrambled eggs",
+          "grams": 100,
+          "carbs": 1
+        },
+        {
+          "name": "cupcake with sprinkles",
+          "grams": 80,
+          "carbs": 40
+        },
+        {
+          "name": "smoked salmon",
+          "grams": 30,
+          "carbs": 0
+        },
+        {
+          "name": "green tea",
+          "grams": 250,
+          "carbs": 0
+        }
+      ]
+    },
+    "total_carbs": 43,
+    "accuracy": 79.62962962962963
+  },
+  "gemini": {
+    "result": {
+      "products": [
+        {
+          "name": "cucumber",
+          "grams": 120,
+          "carbs": 4
+        },
+        {
+          "name": "scrambled eggs",
+          "grams": 150,
+          "carbs": 1
+        },
+        {
+          "name": "smoked salmon",
+          "grams": 50,
+          "carbs": 0
+        },
+        {
+          "name": "paska",
+          "grams": 150,
+          "carbs": 53
+        }
+      ]
+    },
+    "total_carbs": 58,
+    "accuracy": 92.5925925925926
+  }
+}

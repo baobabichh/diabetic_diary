@@ -1,0 +1,64 @@
+{
+  "true_carbs": 41,
+  "openai": {
+    "result": {
+      "products": [
+        {
+          "name": "bread",
+          "grams": 60,
+          "carbs": 30
+        },
+        {
+          "name": "cucumber",
+          "grams": 30,
+          "carbs": 1
+        },
+        {
+          "name": "smoked salmon",
+          "grams": 40,
+          "carbs": 0
+        },
+        {
+          "name": "cream cheese",
+          "grams": 20,
+          "carbs": 1
+        },
+        {
+          "name": "green tea",
+          "grams": 250,
+          "carbs": 0
+        }
+      ]
+    },
+    "total_carbs": 32,
+    "accuracy": 78.04878048780488
+  },
+  "gemini": {
+    "result": {
+      "products": [
+        {
+          "name": "White Bread",
+          "grams": 60,
+          "carbs": 31
+        },
+        {
+          "name": "Cream Cheese",
+          "grams": 40,
+          "carbs": 1
+        },
+        {
+          "name": "Cucumber",
+          "grams": 50,
+          "carbs": 2
+        },
+        {
+          "name": "Smoked Salmon",
+          "grams": 80,
+          "carbs": 0
+        }
+      ]
+    },
+    "total_carbs": 34,
+    "accuracy": 82.92682926829268
+  }
+}

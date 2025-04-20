@@ -4,46 +4,46 @@
     "result": {
       "products": [
         {
-          "name": "Spaghetti",
+          "name": "grilled chicken",
           "grams": 150,
-          "carbs": 110
-        },
-        {
-          "name": "Chicken Breast",
-          "grams": 100,
           "carbs": 0
         },
         {
-          "name": "Corn",
-          "grams": 80,
+          "name": "spaghetti",
+          "grams": 200,
+          "carbs": 62
+        },
+        {
+          "name": "corn",
+          "grams": 100,
           "carbs": 19
         }
       ]
     },
-    "total_carbs": 129,
-    "accuracy": 0
+    "total_carbs": 81,
+    "accuracy": 15.909090909090907
   },
   "gemini": {
     "result": {
       "products": [
         {
-          "name": "Spaghetti",
-          "grams": 150,
-          "carbs": 75
-        },
-        {
-          "name": "Chicken",
-          "grams": 150,
+          "name": "chicken",
+          "grams": 200,
           "carbs": 0
         },
         {
-          "name": "Corn",
-          "grams": 100,
+          "name": "spaghetti with cream sauce",
+          "grams": 250,
+          "carbs": 70
+        },
+        {
+          "name": "corn",
+          "grams": 150,
           "carbs": 20
         }
       ]
     },
-    "total_carbs": 95,
+    "total_carbs": 90,
     "accuracy": 0
   }
 }
