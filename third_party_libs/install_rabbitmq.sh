@@ -1,25 +1,31 @@
 current_dir=$(pwd)
 
-sudo apt-get install -y libboost-all-dev libssl-dev cmake
-
-git clone https://github.com/CopernicaMarketingSoftware/AMQP-CPP.git
-cd AMQP-CPP
+cd $current_dir
+git clone https://github.com/alanxz/rabbitmq-c.git
+cd rabbitmq-c
 mkdir build && cd build
-cmake .. -DAMQP-CPP_BUILD_SHARED=ON -DAMQP-CPP_LINUX_TCP=ON
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
 make
 sudo make install
 
 cd $current_dir
-curl -fsSL https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc | sudo gpg --dearmor -o /usr/share/keyrings/erlang-solutions-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/erlang-solutions-keyring.gpg] https://packages.erlang-solutions.com/ubuntu $(lsb_release -cs) contrib" | sudo tee /etc/apt/sources.list.d/erlang-solutions.list
+git clone https://github.com/alanxz/SimpleAmqpClient.git
+cd SimpleAmqpClient
+mkdir build && cd build
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
+make
+sudo ldconfig
 
-sudo apt update -y
-sudo apt install -y erlang
+# Install
+sudo make install
 
 cd $current_dir
-curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.deb.sh | sudo bash
-
 sudo apt install -y rabbitmq-server
 sudo systemctl start rabbitmq-server
 sudo systemctl enable rabbitmq-server
 sudo systemctl status rabbitmq-server
+sudo rabbitmq-plugins enable rabbitmq_management
+sudo systemctl restart rabbitmq-server
+# sudo rabbitmqctl add_user user pass
+# sudo rabbitmqctl set_user_tags user administrator
+# sudo rabbitmqctl set_permissions -p / user ".*" ".*" ".*"
