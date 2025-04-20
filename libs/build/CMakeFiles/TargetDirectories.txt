@@ -1,3 +1,0 @@
-/home/goshan9/diabetic_diary/libs/build/CMakeFiles/mysharedlib.dir
-/home/goshan9/diabetic_diary/libs/build/CMakeFiles/edit_cache.dir
-/home/goshan9/diabetic_diary/libs/build/CMakeFiles/rebuild_cache.dir
