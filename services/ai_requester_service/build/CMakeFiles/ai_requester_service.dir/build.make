@@ -94,6 +94,7 @@ ai_requester_service: CMakeFiles/ai_requester_service.dir/ai_requester_service.c
 ai_requester_service: CMakeFiles/ai_requester_service.dir/build.make
 ai_requester_service: /home/goshan9/diabetic_diary/services/ai_requester_service/../../third_party_libs//rabbitmq-c/build/librabbitmq/librabbitmq.so
 ai_requester_service: /home/goshan9/diabetic_diary/services/ai_requester_service/../../third_party_libs//SimpleAmqpClient/build/libSimpleAmqpClient.so
+ai_requester_service: /home/goshan9/diabetic_diary/services/ai_requester_service/../../libs//build/libmysharedlib.so
 ai_requester_service: CMakeFiles/ai_requester_service.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/goshan9/diabetic_diary/services/ai_requester_service/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ai_requester_service"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ai_requester_service.dir/link.txt --verbose=$(VERBOSE)

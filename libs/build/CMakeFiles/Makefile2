@@ -81,12 +81,12 @@ clean: CMakeFiles/mysharedlib.dir/clean
 CMakeFiles/mysharedlib.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysharedlib.dir/build.make CMakeFiles/mysharedlib.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysharedlib.dir/build.make CMakeFiles/mysharedlib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/goshan9/diabetic_diary/libs/build/CMakeFiles --progress-num=1,2 "Built target mysharedlib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/goshan9/diabetic_diary/libs/build/CMakeFiles --progress-num=1,2,3 "Built target mysharedlib"
 .PHONY : CMakeFiles/mysharedlib.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/mysharedlib.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/goshan9/diabetic_diary/libs/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/goshan9/diabetic_diary/libs/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/mysharedlib.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/goshan9/diabetic_diary/libs/build/CMakeFiles 0
 .PHONY : CMakeFiles/mysharedlib.dir/rule

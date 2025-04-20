@@ -2,9 +2,8 @@
 
 // Add definition of your processing function here
 
-void AuthenticatorController::register_user(const HttpRequestPtr &req, std::function<void(const HttpResponsePtr &)> &&callback, double p1, int p2) const
+void AuthenticatorController::register_user(const HttpRequestPtr &req, std::function<void(const HttpResponsePtr &)> &&callback) const
 {
-
     const std::string &email = req->getParameter("email");
     const std::string &password = req->getParameter("password");
 
@@ -58,6 +57,40 @@ void AuthenticatorController::register_user(const HttpRequestPtr &req, std::func
     }
 }
 
-void AuthenticatorController::login_user(const HttpRequestPtr &req, std::function<void(const HttpResponsePtr &)> &&callback, double p1, int p2) const
+void AuthenticatorController::login_user(const HttpRequestPtr &req, std::function<void(const HttpResponsePtr &)> &&callback) const
 {
+    const std::string &email = req->getParameter("email");
+    const std::string &password = req->getParameter("password");
+
+    if (email.size() <= 100 && email.size() > 0 && password.size() >= 8 && password.size() <= 100)
+    {
+    }
+    else
+    {
+        responseWithError(callback, "Incorrect email or password.");
+        return;
+    }
+
+    auto client = drogon::app().getDbClient("food_ai");
+
+    try
+    {
+        static const std::string query = "select UUID from Users where Email = ? and Password = ?";
+        const auto result = client->execSqlSync(query, email, password);
+        if (result.empty())
+        {
+            responseWithError(callback, "Wrong email or password");
+            return;
+        }
+
+        std::string uuid = result[0]["UUID"].as<std::string>();
+
+        responseWithSuccess(callback, "Login success.", {{"UUID", uuid}});
+        return;
+    }
+    catch (const drogon::orm::DrogonDbException &e)
+    {
+        responseWithError(callback, "Internal server error.", {{"Exception", e.base().what()}});
+        return;
+    }
 }

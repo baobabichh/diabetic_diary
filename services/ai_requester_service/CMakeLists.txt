@@ -20,4 +20,5 @@ target_include_directories(ai_requester_service PRIVATE
 target_link_libraries(ai_requester_service PRIVATE
     ${THIRDLIBRARY_PATH}/rabbitmq-c/build/librabbitmq/librabbitmq.so
     ${THIRDLIBRARY_PATH}/SimpleAmqpClient/build/libSimpleAmqpClient.so
+    ${MYLIBRARY_PATH}/build/libmysharedlib.so
 )

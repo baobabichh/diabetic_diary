@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/goshan9/diabetic_diary/libs/functions.cpp" "CMakeFiles/mysharedlib.dir/functions.cpp.o" "gcc" "CMakeFiles/mysharedlib.dir/functions.cpp.o.d"
+  "/home/goshan9/diabetic_diary/libs/gemini.cpp" "CMakeFiles/mysharedlib.dir/gemini.cpp.o" "gcc" "CMakeFiles/mysharedlib.dir/gemini.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

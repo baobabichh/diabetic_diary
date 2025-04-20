@@ -999,4 +999,5 @@ CMakeFiles/ai_requester_service.dir/ai_requester_service.cpp.o: \
  /home/goshan9/diabetic_diary/services/ai_requester_service/../../third_party_libs/json/include/nlohmann/ordered_map.hpp \
  /usr/include/c++/13/any \
  /home/goshan9/diabetic_diary/services/ai_requester_service/../../third_party_libs/json/include/nlohmann/detail/macro_unscope.hpp \
- /home/goshan9/diabetic_diary/services/ai_requester_service/../../third_party_libs/json/include/nlohmann/thirdparty/hedley/hedley_undef.hpp
+ /home/goshan9/diabetic_diary/services/ai_requester_service/../../third_party_libs/json/include/nlohmann/thirdparty/hedley/hedley_undef.hpp \
+ /home/goshan9/diabetic_diary/services/ai_requester_service/../../libs/gemini.hpp

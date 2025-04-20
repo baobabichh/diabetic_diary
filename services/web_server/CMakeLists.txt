@@ -38,6 +38,7 @@ target_link_libraries(
     PRIVATE Drogon::Drogon
     ${THIRDLIBRARY_PATH}/rabbitmq-c/build/librabbitmq/librabbitmq.so
     ${THIRDLIBRARY_PATH}/SimpleAmqpClient/build/libSimpleAmqpClient.so
+    ${MYLIBRARY_PATH}/build/libmysharedlib.so
 )
 
 # ##############################################################################

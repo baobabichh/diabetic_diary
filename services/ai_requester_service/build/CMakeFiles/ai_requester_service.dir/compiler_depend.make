@@ -3,6 +3,7 @@
 
 CMakeFiles/ai_requester_service.dir/ai_requester_service.cpp.o: /home/goshan9/diabetic_diary/services/ai_requester_service/ai_requester_service.cpp \
   /home/goshan9/diabetic_diary/libs/functions.hpp \
+  /home/goshan9/diabetic_diary/libs/gemini.hpp \
   /home/goshan9/diabetic_diary/third_party_libs/json/include/nlohmann/adl_serializer.hpp \
   /home/goshan9/diabetic_diary/third_party_libs/json/include/nlohmann/byte_container_with_subtype.hpp \
   /home/goshan9/diabetic_diary/third_party_libs/json/include/nlohmann/detail/abi_macros.hpp \
@@ -1789,9 +1790,7 @@ CMakeFiles/ai_requester_service.dir/ai_requester_service.cpp.o: /home/goshan9/di
 
 /usr/include/boost/range/begin.hpp:
 
-/usr/include/c++/13/bits/locale_classes.h:
-
-/usr/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp:
+/usr/include/boost/range/algorithm/equal.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
 
@@ -1993,10 +1992,6 @@ CMakeFiles/ai_requester_service.dir/ai_requester_service.cpp.o: /home/goshan9/di
 
 /usr/include/boost/mpl/list/list0.hpp:
 
-/usr/include/boost/mpl/and.hpp:
-
-/usr/include/boost/mpl/aux_/config/overload_resolution.hpp:
-
 /usr/include/boost/mpl/O1_size.hpp:
 
 /usr/include/boost/move/detail/config_end.hpp:
@@ -2022,6 +2017,14 @@ CMakeFiles/ai_requester_service.dir/ai_requester_service.cpp.o: /home/goshan9/di
 /usr/include/boost/preprocessor/seq/elem.hpp:
 
 /usr/include/boost/mpl/aux_/config/forwarding.hpp:
+
+/usr/include/boost/mpl/aux_/config/overload_resolution.hpp:
+
+/usr/include/boost/mpl/and.hpp:
+
+/usr/include/c++/13/bits/locale_classes.h:
+
+/usr/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp:
 
 /usr/include/boost/mpl/aux_/iter_apply.hpp:
 
@@ -2059,13 +2062,33 @@ CMakeFiles/ai_requester_service.dir/ai_requester_service.cpp.o: /home/goshan9/di
 
 /usr/include/boost/iterator/iterator_facade.hpp:
 
-/usr/include/boost/range/algorithm/equal.hpp:
-
 /usr/include/boost/iterator/distance.hpp:
+
+/home/goshan9/diabetic_diary/libs/gemini.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
 
 /usr/include/boost/iterator/detail/enable_if.hpp:
+
+/usr/local/include/SimpleAmqpClient/ConsumerTagNotFoundException.h:
+
+/usr/include/boost/mpl/aux_/fold_impl.hpp:
+
+/usr/include/c++/13/bits/ranges_util.h:
+
+/usr/include/boost/iterator/detail/config_undef.hpp:
+
+/usr/include/assert.h:
+
+/usr/include/c++/13/bits/concept_check.h:
+
+/usr/include/boost/utility/string_ref.hpp:
+
+/usr/include/boost/type_traits/is_volatile.hpp:
+
+/usr/include/boost/integer_fwd.hpp:
+
+/usr/include/boost/mpl/placeholders.hpp:
 
 /usr/include/c++/13/bits/basic_string.h:
 
@@ -2181,12 +2204,6 @@ CMakeFiles/ai_requester_service.dir/ai_requester_service.cpp.o: /home/goshan9/di
 
 /usr/include/boost/mpl/sequence_tag.hpp:
 
-/usr/include/boost/type_traits/detail/config.hpp:
-
-/usr/include/boost/concept/assert.hpp:
-
-/usr/include/boost/mpl/list/aux_/clear.hpp:
-
 /usr/include/linux/limits.h:
 
 /usr/include/boost/mpl/always.hpp:
@@ -2221,25 +2238,9 @@ CMakeFiles/ai_requester_service.dir/ai_requester_service.cpp.o: /home/goshan9/di
 
 /home/goshan9/diabetic_diary/third_party_libs/json/include/nlohmann/detail/meta/detected.hpp:
 
-/usr/local/include/SimpleAmqpClient/ConsumerTagNotFoundException.h:
+/usr/include/boost/core/addressof.hpp:
 
-/usr/include/boost/mpl/aux_/fold_impl.hpp:
-
-/usr/include/c++/13/bits/ranges_util.h:
-
-/usr/include/boost/iterator/detail/config_undef.hpp:
-
-/usr/include/assert.h:
-
-/usr/include/c++/13/bits/concept_check.h:
-
-/usr/include/boost/utility/string_ref.hpp:
-
-/usr/include/boost/type_traits/is_volatile.hpp:
-
-/usr/include/boost/integer_fwd.hpp:
-
-/usr/include/boost/mpl/placeholders.hpp:
+/home/goshan9/diabetic_diary/third_party_libs/json/include/nlohmann/thirdparty/hedley/hedley_undef.hpp:
 
 /usr/include/c++/13/bits/ranges_base.h:
 
@@ -2255,29 +2256,9 @@ CMakeFiles/ai_requester_service.dir/ai_requester_service.cpp.o: /home/goshan9/di
 
 /home/goshan9/diabetic_diary/third_party_libs/json/include/nlohmann/detail/iterators/internal_iterator.hpp:
 
-/usr/include/boost/core/addressof.hpp:
+/usr/include/boost/type_traits/type_identity.hpp:
 
-/home/goshan9/diabetic_diary/third_party_libs/json/include/nlohmann/thirdparty/hedley/hedley_undef.hpp:
-
-/usr/include/boost/type_traits/enable_if.hpp:
-
-/usr/include/boost/config/compiler/gcc.hpp:
-
-/usr/include/boost/iterator/interoperable.hpp:
-
-/usr/include/c++/13/ext/atomicity.h:
-
-/usr/include/boost/core/default_allocator.hpp:
-
-/usr/include/boost/mpl/distance_fwd.hpp:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h:
-
-/usr/include/x86_64-linux-gnu/bits/wchar.h:
-
-/usr/include/boost/blank.hpp:
-
-/usr/include/boost/mpl/insert.hpp:
+/home/goshan9/diabetic_diary/third_party_libs/json/include/nlohmann/detail/conversions/from_json.hpp:
 
 /usr/include/boost/mpl/aux_/iter_fold_if_impl.hpp:
 
@@ -2303,10 +2284,6 @@ CMakeFiles/ai_requester_service.dir/ai_requester_service.cpp.o: /home/goshan9/di
 
 /usr/include/boost/mpl/list/list10.hpp:
 
-/usr/include/boost/type_traits/type_identity.hpp:
-
-/home/goshan9/diabetic_diary/third_party_libs/json/include/nlohmann/detail/conversions/from_json.hpp:
-
 /usr/include/boost/type_traits/is_unbounded_array.hpp:
 
 /home/goshan9/diabetic_diary/libs/functions.hpp:
@@ -2318,6 +2295,26 @@ CMakeFiles/ai_requester_service.dir/ai_requester_service.cpp.o: /home/goshan9/di
 /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
 
 /usr/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp:
+
+/usr/include/boost/type_traits/enable_if.hpp:
+
+/usr/include/boost/config/compiler/gcc.hpp:
+
+/usr/include/boost/iterator/interoperable.hpp:
+
+/usr/include/c++/13/ext/atomicity.h:
+
+/usr/include/boost/core/default_allocator.hpp:
+
+/usr/include/boost/mpl/distance_fwd.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
+
+/usr/include/boost/blank.hpp:
+
+/usr/include/boost/mpl/insert.hpp:
 
 /usr/include/boost/iterator/is_iterator.hpp:
 
@@ -2398,6 +2395,12 @@ CMakeFiles/ai_requester_service.dir/ai_requester_service.cpp.o: /home/goshan9/di
 /usr/include/boost/iterator/advance.hpp:
 
 /usr/include/boost/core/alloc_construct.hpp:
+
+/usr/include/boost/type_traits/detail/config.hpp:
+
+/usr/include/boost/concept/assert.hpp:
+
+/usr/include/boost/mpl/list/aux_/clear.hpp:
 
 /usr/include/c++/13/bits/stl_numeric.h:
 
@@ -2549,9 +2552,9 @@ CMakeFiles/ai_requester_service.dir/ai_requester_service.cpp.o: /home/goshan9/di
 
 /usr/include/boost/concept/usage.hpp:
 
-/usr/include/boost/lexical_cast/detail/converter_numeric.hpp:
-
 /usr/include/boost/mpl/long_fwd.hpp:
+
+/usr/include/boost/lexical_cast/detail/converter_numeric.hpp:
 
 /usr/include/boost/move/detail/config_begin.hpp:
 

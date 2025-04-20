@@ -5,10 +5,14 @@
 
 int main()
 {
+    if(!Cfg::getInstance().loadFromEnv())
     {
-        const std::string filename = "../../../credentials.json";
-        const auto db_user = getCfgValue(filename, "db_user");
-        const auto db_pass = getCfgValue(filename, "db_pass");
+        return false;
+    }
+
+    {
+        const auto db_user = Cfg::getInstance().getCfgValue("db_user");
+        const auto db_pass = Cfg::getInstance().getCfgValue("db_pass");
 
         if(db_user.empty() || db_pass.empty())
         {

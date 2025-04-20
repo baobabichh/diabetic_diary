@@ -153,6 +153,30 @@ functions.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysharedlib.dir/build.make CMakeFiles/mysharedlib.dir/functions.cpp.s
 .PHONY : functions.cpp.s
 
+gemini.o: gemini.cpp.o
+.PHONY : gemini.o
+
+# target to build an object file
+gemini.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysharedlib.dir/build.make CMakeFiles/mysharedlib.dir/gemini.cpp.o
+.PHONY : gemini.cpp.o
+
+gemini.i: gemini.cpp.i
+.PHONY : gemini.i
+
+# target to preprocess a source file
+gemini.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysharedlib.dir/build.make CMakeFiles/mysharedlib.dir/gemini.cpp.i
+.PHONY : gemini.cpp.i
+
+gemini.s: gemini.cpp.s
+.PHONY : gemini.s
+
+# target to generate assembly for a file
+gemini.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mysharedlib.dir/build.make CMakeFiles/mysharedlib.dir/gemini.cpp.s
+.PHONY : gemini.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -165,6 +189,9 @@ help:
 	@echo "... functions.o"
 	@echo "... functions.i"
 	@echo "... functions.s"
+	@echo "... gemini.o"
+	@echo "... gemini.i"
+	@echo "... gemini.s"
 .PHONY : help
 
 

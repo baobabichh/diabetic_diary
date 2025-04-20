@@ -4,6 +4,7 @@
 CMakeFiles/ai_requester_service.dir/ai_requester_service.cpp.o
  /home/goshan9/diabetic_diary/services/ai_requester_service/ai_requester_service.cpp
  /home/goshan9/diabetic_diary/libs/functions.hpp
+ /home/goshan9/diabetic_diary/libs/gemini.hpp
  /home/goshan9/diabetic_diary/third_party_libs/json/include/nlohmann/adl_serializer.hpp
  /home/goshan9/diabetic_diary/third_party_libs/json/include/nlohmann/byte_container_with_subtype.hpp
  /home/goshan9/diabetic_diary/third_party_libs/json/include/nlohmann/detail/abi_macros.hpp
