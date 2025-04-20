@@ -27,9 +27,9 @@ int main(int argc, char *argv[])
         const std::string username = rabbitmq_user;
         const std::string password = rabbitmq_pass;
         const std::string vhost = "/";
+        const std::string queue_name = "test_queue";
 
         AmqpClient::Channel::ptr_t channel = AmqpClient::Channel::Create(hostname, port, username, password, vhost);
-        std::string queue_name = "test_queue";
         while (true)
         {
             AmqpClient::Envelope::ptr_t envelope = channel->BasicConsumeMessage(channel->BasicConsume(queue_name, "", true, true));
@@ -39,15 +39,13 @@ int main(int argc, char *argv[])
                 AmqpClient::BasicMessage::ptr_t message = envelope->Message();
                 std::string body = message->Body();
 
-                std::cout << "Received message: " << body << std::endl;
-
                 channel->BasicAck(envelope);
             }
         }
     }
     catch (const std::exception &e)
     {
-        std::cerr << "Error: " << e.what() << std::endl;
+        LOG_ERROR(e.what());
         return 1;
     }
 
