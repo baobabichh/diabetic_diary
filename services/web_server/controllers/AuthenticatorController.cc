@@ -1,7 +1,5 @@
 #include "AuthenticatorController.h"
 
-// Add definition of your processing function here
-
 void AuthenticatorController::register_user(const HttpRequestPtr &req, std::function<void(const HttpResponsePtr &)> &&callback) const
 {
     const std::string &email = req->getParameter("email");
@@ -12,7 +10,7 @@ void AuthenticatorController::register_user(const HttpRequestPtr &req, std::func
     }
     else
     {
-        responseWithError(callback, "Incorrect email or password.");
+        responseWithErrorMsg(callback, "Incorrect email or password.");
         return;
     }
 
@@ -26,7 +24,7 @@ void AuthenticatorController::register_user(const HttpRequestPtr &req, std::func
             const auto result = client->execSqlSync(query, email);
             if (result[0][0].as<size_t>() >= 1)
             {
-                responseWithError(callback, "There is already user with such email.");
+                responseWithErrorMsg(callback, "There is already user with such email.");
                 return;
             }
         }
@@ -47,12 +45,13 @@ void AuthenticatorController::register_user(const HttpRequestPtr &req, std::func
             client->execSqlSync(query, email, password, uuid);
         }
 
-        responseWithSuccess(callback, "User registered.", {{"UUID", uuid}});
+        responseWithSuccess(callback, {"UUID", uuid});
         return;
     }
     catch (const drogon::orm::DrogonDbException &e)
     {
-        responseWithError(callback, "Internal server error.", {{"Exception", e.base().what()}});
+        LOG_ERROR(e.base().what());
+        responseWithErrorMsg(callback, "Internal server error.");
         return;
     }
 }
@@ -67,7 +66,7 @@ void AuthenticatorController::login_user(const HttpRequestPtr &req, std::functio
     }
     else
     {
-        responseWithError(callback, "Incorrect email or password.");
+        responseWithErrorMsg(callback, "Incorrect email or password.");
         return;
     }
 
@@ -79,18 +78,19 @@ void AuthenticatorController::login_user(const HttpRequestPtr &req, std::functio
         const auto result = client->execSqlSync(query, email, password);
         if (result.empty())
         {
-            responseWithError(callback, "Wrong email or password");
+            responseWithErrorMsg(callback, "Wrong email or password");
             return;
         }
 
         std::string uuid = result[0]["UUID"].as<std::string>();
 
-        responseWithSuccess(callback, "Login success.", {{"UUID", uuid}});
+        responseWithSuccess(callback, {"UUID", uuid});
         return;
     }
     catch (const drogon::orm::DrogonDbException &e)
     {
-        responseWithError(callback, "Internal server error.", {{"Exception", e.base().what()}});
+        LOG_ERROR(e.base().what());
+        responseWithErrorMsg(callback, "Internal server error.");
         return;
     }
 }
