@@ -4,6 +4,24 @@
 #include <string>
 #include <fstream>
 #include "nlohmann/json.hpp"
+#include <set>
+#include <unordered_set>
+
+template <typename F>
+class ScopeExit
+{
+    F func;
+
+public:
+    explicit ScopeExit(F f) : func(std::move(f)) {}
+    ~ScopeExit() { func(); }
+};
+
+template <typename F>
+ScopeExit<F> makeScopeExit(F f)
+{
+    return ScopeExit<F>(std::move(f));
+}
 
 class Logger
 {
@@ -19,22 +37,22 @@ public:
         return s;
     }
 
-    constexpr void bindInfo(std::ostream *stream)
+    inline void bindInfo(std::ostream *stream)
     {
         _info_stream = stream;
     }
 
-    constexpr void bindError(std::ostream *stream)
+    inline void bindError(std::ostream *stream)
     {
         _error_stream = stream;
     }
 
-    constexpr void info(const std::string &str)
+    inline void info(const std::string &str)
     {
         (*_info_stream) << str << std::endl;
     }
 
-    constexpr void error(const std::string &str)
+    inline void error(const std::string &str)
     {
         (*_error_stream) << str << std::endl;
     }
@@ -48,18 +66,21 @@ private:
     std::ostream *_error_stream{&std::cerr};
 };
 
+#undef LOG_ERROR
 #define LOG_ERROR(x)                                                                                                                     \
     do                                                                                                                                   \
     {                                                                                                                                    \
         Logger::getInstance().error(std::string{__FILE__} + ":" + std::to_string(__LINE__) + " " + std::string{__FUNCTION__} + " " + x); \
     } while (0)
+
+#undef LOG_INFO
 #define LOG_INFO(x)                                                                                                                     \
     do                                                                                                                                  \
     {                                                                                                                                   \
         Logger::getInstance().info(std::string{__FILE__} + ":" + std::to_string(__LINE__) + " " + std::string{__FUNCTION__} + " " + x); \
     } while (0)
 
-std::string getFileAsString(const std::string &path)
+inline std::string getFileAsString(const std::string &path)
 {
     std::ifstream file{path};
     if (!file)
@@ -72,6 +93,26 @@ std::string getFileAsString(const std::string &path)
     ss << file.rdbuf();
 
     return ss.str();
+}
+
+inline bool writeBytesToFile(const std::string &filename, const std::vector<uint8_t> &data)
+{
+    std::ofstream file(filename, std::ios::binary);
+
+    if (!file.is_open())
+    {
+        LOG_ERROR("Can not open file to write: " + filename);
+        return false;
+    }
+
+    file.write(reinterpret_cast<const char *>(data.data()), data.size());
+    if (file.fail())
+    {
+        LOG_ERROR("Can write to file: " + filename);
+        return false;
+    }
+
+    return true;
 }
 
 class Cfg
@@ -111,7 +152,7 @@ public:
 
         _file_json = nlohmann::json::parse(file_str);
 
-        return true;
+        return checkValues();
     }
 
     inline bool loadFromEnv()
@@ -138,6 +179,36 @@ public:
 
         _file_json = nlohmann::json::parse(file_str);
 
+        return checkValues();
+    }
+
+    inline bool checkValues() const
+    {
+        static const std::array needed_keys{
+            "openai_api_key",
+            "gemini_api_key",
+            "claude_api_key",
+            "db_user",
+            "db_pass",
+            "rabbitmq_user",
+            "rabbitmq_pass",
+            "photos_storage_absolute_path",
+        };
+
+        for (const auto &key : needed_keys)
+        {
+            if (getCfgValue(key).empty())
+            {
+                LOG_ERROR("no key in cfg: " + key);
+                return false;
+            }
+        }
+
+        if (!std::filesystem::create_directories(getCfgValue("photos_storage_absolute_path")))
+        {
+            LOG_ERROR("failed to create photos_storage_absolute_path: " + getCfgValue("photos_storage_absolute_path"));
+            return false;
+        }
         return true;
     }
 
@@ -159,13 +230,63 @@ private:
     nlohmann::json _file_json{};
 };
 
+inline static const std::string base64_chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    "abcdefghijklmnopqrstuvwxyz"
+    "0123456789+/";
+
+inline const std::vector<unsigned char> base64_decode(const std::string &base64_string)
+{
+    std::vector<unsigned char> decoded_data;
+    decoded_data.reserve(base64_string.size() * 3 / 4);
+
+    int in_len = base64_string.size();
+    int i = 0;
+    int j = 0;
+    int in_ = 0;
+    unsigned char char_array_4[4], char_array_3[3];
+
+    while (in_len-- && (base64_string[in_] != '=') &&
+           (isalnum(base64_string[in_]) || (base64_string[in_] == '+') || (base64_string[in_] == '/')))
+    {
+        char_array_4[i++] = base64_string[in_];
+        in_++;
+        if (i == 4)
+        {
+            for (i = 0; i < 4; i++)
+                char_array_4[i] = base64_chars.find(char_array_4[i]);
+
+            char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);
+            char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
+            char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
+
+            for (i = 0; (i < 3); i++)
+                decoded_data.push_back(char_array_3[i]);
+            i = 0;
+        }
+    }
+
+    if (i)
+    {
+        for (j = i; j < 4; j++)
+            char_array_4[j] = 0;
+
+        for (j = 0; j < 4; j++)
+            char_array_4[j] = base64_chars.find(char_array_4[j]);
+
+        char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);
+        char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
+        char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
+
+        for (j = 0; (j < i - 1); j++)
+            decoded_data.push_back(char_array_3[j]);
+    }
+
+    return decoded_data;
+}
+
 inline std::string base64_encode(const std::vector<unsigned char> &data)
 {
-    static const std::string base64_chars =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        "abcdefghijklmnopqrstuvwxyz"
-        "0123456789+/";
-
     std::string ret;
     int i = 0;
     int j = 0;
@@ -250,12 +371,17 @@ struct MimeTypeAndBase64
     }
 };
 
+inline static const std::unordered_set<std::string> supported_mime_types
+{
+    "image/jpeg",
+    "image/png",
+};
+
 inline MimeTypeAndBase64 image_to_base64_data_uri(const std::string &image_path)
 {
     std::string base64_string = image_to_base64(image_path);
-    if(base64_string.empty())
+    if (base64_string.empty())
     {
-        LOG_ERROR("if(base64_string.empty())");
         return {};
     }
 
@@ -266,18 +392,30 @@ inline MimeTypeAndBase64 image_to_base64_data_uri(const std::string &image_path)
     {
         mime_type = "image/png";
     }
-    else if (ext == "gif")
+
+    if(!supported_mime_types.count(mime_type))
     {
-        mime_type = "image/gif";
-    }
-    else if (ext == "bmp")
-    {
-        mime_type = "image/bmp";
-    }
-    else if (ext == "webp")
-    {
-        mime_type = "image/webp";
+        return {};
     }
 
     return MimeTypeAndBase64{mime_type, base64_string};
+}
+
+inline std::string ext_of_mime_type(const std::string& mime_type)
+{
+    if(!supported_mime_types.count(mime_type))
+    {
+        return {};
+    }
+
+    const auto img_post = mime_type.find("image/");
+    if(img_post == std::string::npos)
+    {
+        return {};
+    }
+
+    std::string copy_str = mime_type;
+    copy_str.erase(img_post, strlen("image/"));
+
+    return copy_str;
 }

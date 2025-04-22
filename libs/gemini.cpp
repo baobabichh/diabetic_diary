@@ -11,11 +11,6 @@ static size_t WriteCallback(void *contents, size_t size, size_t nmemb, std::stri
 bool gemini::jsonTextImg(const std::string &prompt, const std::string &mime_type, const std::string &base64_image, const nlohmann::json &response_schema, nlohmann::json &res_json)
 {
     const std::string api_key = Cfg::getInstance().getCfgValue("gemini_api_key");
-    if (api_key.empty())
-    {
-        LOG_ERROR("if(api_key.empty())");
-        return false;
-    }
 
     struct curl_slist *headers = NULL;
     CURL *curl = NULL;

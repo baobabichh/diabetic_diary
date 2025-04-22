@@ -15,12 +15,6 @@ int main(int argc, char *argv[])
     const auto rabbitmq_user = Cfg::getInstance().getCfgValue("rabbitmq_user");
     const auto rabbitmq_pass = Cfg::getInstance().getCfgValue("rabbitmq_pass");
 
-    if (rabbitmq_user.empty() || rabbitmq_pass.empty())
-    {
-        LOG_ERROR("if(rabbitmq_user.empty() || rabbitmq_pass.empty())");
-        return 1;
-    }
-
     const nlohmann::json nutrition_schema = {
         {"type", "object"},
         {"properties", {{"products", {{"type", "array"}, {"items", {{"type", "object"}, {"properties", {{"name", {{"type", "string"}, {"description", "Exact food name identified in the image"}}}, {"grams", {{"type", "integer"}, {"description", "Detected weight in grams"}}}, {"carbs", {{"type", "integer"}, {"description", "Calculated total carbohydrates rounded to the nearest integer"}}}}}, {"required", {"name", "grams", "carbs"}}}}}}}},

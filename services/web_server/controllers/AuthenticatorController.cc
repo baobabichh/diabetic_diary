@@ -14,7 +14,7 @@ void AuthenticatorController::register_user(const HttpRequestPtr &req, std::func
         return;
     }
 
-    auto client = drogon::app().getDbClient("food_ai");
+    auto client = drogon::app().getDbClient("dd");
     std::string uuid{};
 
     try
@@ -45,7 +45,7 @@ void AuthenticatorController::register_user(const HttpRequestPtr &req, std::func
             client->execSqlSync(query, email, password, uuid);
         }
 
-        responseWithSuccess(callback, {"UUID", uuid});
+        responseWithSuccess(callback, {{"UUID", uuid}});
         return;
     }
     catch (const drogon::orm::DrogonDbException &e)
@@ -70,7 +70,7 @@ void AuthenticatorController::login_user(const HttpRequestPtr &req, std::functio
         return;
     }
 
-    auto client = drogon::app().getDbClient("food_ai");
+    auto client = drogon::app().getDbClient("dd");
 
     try
     {
@@ -84,7 +84,7 @@ void AuthenticatorController::login_user(const HttpRequestPtr &req, std::functio
 
         std::string uuid = result[0]["UUID"].as<std::string>();
 
-        responseWithSuccess(callback, {"UUID", uuid});
+        responseWithSuccess(callback, {{"UUID", uuid}});
         return;
     }
     catch (const drogon::orm::DrogonDbException &e)

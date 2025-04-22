@@ -14,12 +14,6 @@ int main()
         const auto db_user = Cfg::getInstance().getCfgValue("db_user");
         const auto db_pass = Cfg::getInstance().getCfgValue("db_pass");
 
-        if(db_user.empty() || db_pass.empty())
-        {
-            Logger::getInstance().error("if(db_user.empty() || db_pass.empty())");
-            return 1;
-        }
-
         drogon::orm::MysqlConfig cfg{};
         cfg.host = "127.0.0.1";
         cfg.port = 3306;
@@ -32,7 +26,7 @@ int main()
         drogon::app().addDbClient(cfg);
     }
 
-    drogon::app().addListener("0.0.0.0", 5555);
+    drogon::app().addListener("0.0.0.0", 5050);
     drogon::app().run();
     return 0;
 }
