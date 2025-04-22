@@ -9,6 +9,7 @@ void FoodRecognitionController::recognize_food(const HttpRequestPtr &req, std::f
         return;
     }
 
+    bool is_error{false};
     auto client = drogon::app().getDbClient("dd");
     std::string request_id{};
     std::string full_photo_path{};
@@ -16,6 +17,10 @@ void FoodRecognitionController::recognize_food(const HttpRequestPtr &req, std::f
     const auto scope_exit = makeScopeExit(
         [&]()
         {
+            if(!is_error)
+            {
+                return;
+            }
             auto client = drogon::app().getDbClient("dd");
             if (request_id.size())
             {
@@ -51,6 +56,7 @@ void FoodRecognitionController::recognize_food(const HttpRequestPtr &req, std::f
 
     if (base64_string.empty() || base64_string.empty())
     {
+        is_error = true;
         responseWithErrorMsg(callback, "base64_string or mime_type is empty.");
         return;
     }
@@ -58,6 +64,7 @@ void FoodRecognitionController::recognize_food(const HttpRequestPtr &req, std::f
     const auto decoded_image_data = base64_decode(base64_string);
     if(decoded_image_data.empty())
     {
+        is_error = true;
         LOG_ERROR("if(decoded_image_data.empty())");
         responseWithErrorMsg(callback, "Internal server error.");
         return;
@@ -66,6 +73,7 @@ void FoodRecognitionController::recognize_food(const HttpRequestPtr &req, std::f
     const std::string photo_ext = ext_of_mime_type(mime_type);
     if(photo_ext.empty())
     {
+        is_error = true;
         LOG_ERROR("if(photo_ext.empty())");
         responseWithErrorMsg(callback, "Internal server error.");
         return;
@@ -94,6 +102,7 @@ void FoodRecognitionController::recognize_food(const HttpRequestPtr &req, std::f
     }
     catch (const drogon::orm::DrogonDbException &e)
     {
+        is_error = true;
         LOG_ERROR(e.base().what());
         responseWithErrorMsg(callback, "Internal server error.");
         return;
@@ -104,6 +113,7 @@ void FoodRecognitionController::recognize_food(const HttpRequestPtr &req, std::f
     full_photo_path = photos_folder_path + "/" + request_id + "." + photo_ext;
     if(!writeBytesToFile(full_photo_path, decoded_image_data))
     {
+        is_error = true;
         LOG_ERROR("if(!writeBytesToFile(full_photo_path, decoded_image_data))");
         responseWithErrorMsg(callback, "Internal server error.");
         return;
@@ -112,5 +122,15 @@ void FoodRecognitionController::recognize_food(const HttpRequestPtr &req, std::f
     nlohmann::json food_obj{};
     food_obj["FoodRecognitionID"] = request_id;
 
-    getRabbitMqPublisher().publish("recognize_food", food_obj.dump());
+    if(!getRabbitMqPublisher().publish("recognize_food", food_obj.dump()))
+    {
+        is_error = true;
+        LOG_ERROR("failed to publish");
+        responseWithErrorMsg(callback, "Internal server error.");
+        return;
+    }
+
+    is_error = false;
+    responseWithSuccessMsg(callback, "{}");
+    return;
 }

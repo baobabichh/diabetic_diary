@@ -204,11 +204,18 @@ public:
             }
         }
 
-        if (!std::filesystem::create_directories(getCfgValue("photos_storage_absolute_path")))
+
+        try
+        {
+            std::filesystem::create_directories(getCfgValue("photos_storage_absolute_path"));
+        }
+        catch(const std::exception& e)
         {
             LOG_ERROR("failed to create photos_storage_absolute_path: " + getCfgValue("photos_storage_absolute_path"));
+            LOG_ERROR(e.what());
             return false;
         }
+        
         return true;
     }
 
@@ -375,6 +382,7 @@ inline static const std::unordered_set<std::string> supported_mime_types
 {
     "image/jpeg",
     "image/png",
+    "image/jpg",
 };
 
 inline MimeTypeAndBase64 image_to_base64_data_uri(const std::string &image_path)
@@ -391,6 +399,10 @@ inline MimeTypeAndBase64 image_to_base64_data_uri(const std::string &image_path)
     if (ext == "png")
     {
         mime_type = "image/png";
+    }
+    else if (ext == "jpg")
+    {
+        mime_type = "image/jpg";
     }
 
     if(!supported_mime_types.count(mime_type))
