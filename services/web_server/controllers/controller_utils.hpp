@@ -1,3 +1,5 @@
+#pragma once
+
 #include "nlohmann/json.hpp"
 #include <drogon/orm/Exception.h>
 #include <drogon/drogon.h>
