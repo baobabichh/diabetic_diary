@@ -7,6 +7,17 @@
 #include <set>
 #include <unordered_set>
 
+struct FoodRecognitions
+{
+    struct Status
+    {
+        inline static const std::string Waiting{"1"};
+        inline static const std::string Processing{"2"};
+        inline static const std::string Done{"3"};
+        inline static const std::string Error{"4"};
+    };
+};
+
 template <typename F>
 class ScopeExit
 {
@@ -93,6 +104,19 @@ inline std::string getFileAsString(const std::string &path)
     ss << file.rdbuf();
 
     return ss.str();
+}
+
+inline std::vector<uint8_t> getFileAsStringVecU8(const std::string &path)
+{
+    std::string res_str = getFileAsString(path);
+    std::vector<uint8_t> res_vec{};
+    res_vec.reserve(res_str.size());
+    for(auto c : res_str)
+    {
+        res_vec.push_back((uint8_t)c); 
+    }
+
+    return res_vec;
 }
 
 inline bool writeBytesToFile(const std::string &filename, const std::vector<uint8_t> &data)

@@ -1,6 +1,10 @@
 sudo apt-get update -y
 sudo apt-get upgrade -y
 
+sudo apt-get install -y libmysqlcppconn-dev
+sudo apt-get update -y
+sudo apt-get upgrade -y
+
 sudo apt install -y git gcc g++ cmake
 sudo apt-get update -y
 sudo apt-get upgrade -y

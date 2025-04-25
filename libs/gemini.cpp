@@ -85,7 +85,8 @@ bool gemini::jsonTextImg(const std::string &prompt, const std::string &mime_type
         {
 
             res_json = full_response["candidates"][0]["content"]["parts"][0]["text"];
-            success = true;
+            cleanup();
+            return true;
         }
         else
         {

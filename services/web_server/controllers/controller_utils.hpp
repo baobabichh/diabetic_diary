@@ -10,17 +10,6 @@
 
 using namespace drogon;
 
-struct FoodRecognitions
-{
-    struct Status
-    {
-        inline static const std::string Waiting{"1"};
-        inline static const std::string Processing{"2"};
-        inline static const std::string Done{"3"};
-        inline static const std::string Error{"4"};
-    };
-};
-
 inline void responseWithError(std::function<void(const HttpResponsePtr &)> &callback, const nlohmann::json &object)
 {
     auto response = HttpResponse::newHttpResponse();
@@ -128,9 +117,15 @@ public:
             const std::string username = user;
             const std::string password = pass;
             const std::string vhost = "/";
-            const std::string queue_name = "test_queue";
 
             _channel = AmqpClient::Channel::Create(hostname, port, username, password, vhost);
+
+            std::string queue_name = "recognize_food";
+            bool passive = false;
+            bool durable = true;
+            bool exclusive = false;
+            bool auto_delete = false;
+            _channel->DeclareQueue(queue_name, passive, durable, exclusive, auto_delete);
         }
         catch (const std::exception &e)
         {

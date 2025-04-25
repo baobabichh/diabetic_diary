@@ -119,6 +119,19 @@ void FoodRecognitionController::recognize_food(const HttpRequestPtr &req, std::f
         return;
     }
 
+    try
+    {
+        static const std::string query = "update FoodRecognitions set ImagePath = ? where id = ?";
+        client->execSqlSync(query, full_photo_path, request_id);
+    }
+    catch (const drogon::orm::DrogonDbException &e)
+    {
+        is_error = true;
+        LOG_ERROR(e.base().what());
+        responseWithErrorMsg(callback, "Internal server error.");
+        return;
+    }
+
     nlohmann::json food_obj{};
     food_obj["FoodRecognitionID"] = request_id;
 
