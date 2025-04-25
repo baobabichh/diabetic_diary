@@ -87,7 +87,6 @@ int main(int argc, char *argv[])
                 {
                     AmqpClient::BasicMessage::ptr_t message = envelope->Message();
                     std::string body = message->Body();
-                    LOG_INFO("body: " + body);
 
                     if (!nlohmann::json::accept(body))
                     {
