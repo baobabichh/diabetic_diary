@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
                         size_t rows_count{};
 
                         {
-                            sql::PreparedStatement* pstmt{nullptr};
+                            sql::PreparedStatement *pstmt{nullptr};
                             sql::ResultSet *res{nullptr};
 
                             const auto scope_exit = makeScopeExit(
@@ -147,7 +147,7 @@ int main(int argc, char *argv[])
                             channel->BasicReject(envelope, true);
                             return;
                         }
-                        
+
                         const auto mime_and_base64 = image_to_base64_data_uri(image_path);
                         if (mime_and_base64.base64_string.empty() || mime_and_base64.mime_type.empty())
                         {
@@ -155,7 +155,7 @@ int main(int argc, char *argv[])
                             channel->BasicReject(envelope, true);
                             return;
                         }
-                        
+
                         nlohmann::json res_json{};
                         if (!gemini::jsonTextImg(prompt, mime_and_base64.mime_type, mime_and_base64.base64_string, nutrition_schema, res_json))
                         {
@@ -165,7 +165,7 @@ int main(int argc, char *argv[])
                         }
 
                         {
-                            sql::PreparedStatement* pstmt{nullptr};
+                            sql::PreparedStatement *pstmt{nullptr};
                             sql::ResultSet *res{nullptr};
 
                             const auto scope_exit = makeScopeExit(
