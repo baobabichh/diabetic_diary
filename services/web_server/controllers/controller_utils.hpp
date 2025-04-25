@@ -119,13 +119,6 @@ public:
             const std::string vhost = "/";
 
             _channel = AmqpClient::Channel::Create(hostname, port, username, password, vhost);
-
-            std::string queue_name = "recognize_food";
-            bool passive = false;
-            bool durable = true;
-            bool exclusive = false;
-            bool auto_delete = false;
-            _channel->DeclareQueue(queue_name, passive, durable, exclusive, auto_delete);
         }
         catch (const std::exception &e)
         {

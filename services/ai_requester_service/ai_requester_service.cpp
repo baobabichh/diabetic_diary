@@ -76,14 +76,6 @@ int main(int argc, char *argv[])
         const std::string vhost = "/";
 
         AmqpClient::Channel::ptr_t channel = AmqpClient::Channel::Create(hostname, port, username, password, vhost);
-
-        std::string queue_name = "recognize_food";
-        bool passive = false;
-        bool durable = true;
-        bool exclusive = false;
-        bool auto_delete = false;
-        channel->DeclareQueue(queue_name, passive, durable, exclusive, auto_delete);
-
         std::string consumer_tag = channel->BasicConsume("recognize_food", "", true, false, false, 1);
 
         while (true)
