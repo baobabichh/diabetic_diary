@@ -144,6 +144,126 @@ void FoodRecognitionController::recognize_food(const HttpRequestPtr &req, std::f
     }
 
     is_error = false;
-    responseWithSuccessMsg(callback, "{}");
+    responseWithSuccess(callback, food_obj);
     return;
+}
+
+void FoodRecognitionController::get_status(const HttpRequestPtr & req, std::function<void(const HttpResponsePtr&)>&& callback) const
+{
+    const auto user_identity = getUserIdentity(req);
+    if (!user_identity.isCorrect())
+    {
+        responseWithNotLoggedIn(callback);
+        return;
+    }
+
+    auto client = drogon::app().getDbClient("dd");
+
+    const std::string req_id = req->getParameter("request_id");
+    if(req_id.empty() || stringToSizeT(req_id) <= 0)
+    {
+        responseWithErrorMsg(callback, "req_id is empty.");
+        return;
+    }
+
+    try
+    {
+        static const std::string query = "select Status from FoodRecognitions where id = ?";
+        const auto result = client->execSqlSync(query, req_id);
+
+        if(result.size() <= 0)
+        {
+            responseWithErrorMsg(callback, "No such reqeust.");
+            return;
+        }
+
+        nlohmann::json res_json{};
+
+        for(auto& row : result)
+        {
+            std::string status_int = row["Status"].as<std::string>();
+            if(FoodRecognitions::Status::Waiting == status_int)
+            {
+                res_json["Status"] = "Waiting";
+            }
+            else if(FoodRecognitions::Status::Processing == status_int)
+            {
+                res_json["Status"] = "Processing";
+            }
+            else if(FoodRecognitions::Status::Error == status_int)
+            {
+                res_json["Status"] = "Error";
+            }
+            else if(FoodRecognitions::Status::Done == status_int)
+            {
+                res_json["Status"] = "Done";
+            }
+            else
+            {
+                responseWithErrorMsg(callback, "Internal server error.");
+                return;
+            }
+            responseWithSuccess(callback, res_json);
+            return;
+        }
+    }
+    catch (const drogon::orm::DrogonDbException &e)
+    {
+        LOG_ERROR(e.base().what());
+        responseWithErrorMsg(callback, "Internal server error.");
+        return;
+    }
+}
+
+void FoodRecognitionController::get_result(const HttpRequestPtr &req, std::function<void(const HttpResponsePtr &)> &&callback) const
+{
+    const auto user_identity = getUserIdentity(req);
+    if (!user_identity.isCorrect())
+    {
+        responseWithNotLoggedIn(callback);
+        return;
+    }
+
+    auto client = drogon::app().getDbClient("dd");
+
+    const std::string req_id = req->getParameter("request_id");
+    if(req_id.empty() || stringToSizeT(req_id) <= 0)
+    {
+        responseWithErrorMsg(callback, "request_id is empty.");
+        return;
+    }
+
+    try
+    {
+        static const std::string query = "select ResultJson from FoodRecognitions where id = ? and Status = ?";
+        const auto result = client->execSqlSync(query, req_id, FoodRecognitions::Status::Done);
+
+        if(result.size() <= 0)
+        {
+            responseWithErrorMsg(callback, "No such reqeust.");
+            return;
+        }
+
+        nlohmann::json res_json{};
+
+        for(auto& row : result)
+        {
+            std::string result_json_str = row["ResultJson"].as<std::string>();
+
+            if(!nlohmann::json::accept(result_json_str))
+            {
+                responseWithErrorMsg(callback, "Internal server error.");
+                return;
+            }
+            auto info_json = nlohmann::json::parse(result_json_str);
+            responseWithSuccess(callback, info_json);
+            return;
+        }
+    }
+    catch (const drogon::orm::DrogonDbException &e)
+    {
+        LOG_ERROR(e.base().what());
+        responseWithErrorMsg(callback, "Internal server error.");
+        return;
+    }
 }

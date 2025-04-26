@@ -11,10 +11,10 @@ struct FoodRecognitions
 {
     struct Status
     {
-        inline static const std::string Waiting{"1"};
-        inline static const std::string Processing{"2"};
-        inline static const std::string Done{"3"};
-        inline static const std::string Error{"4"};
+        static const std::string Waiting;
+        static const std::string Processing;
+        static const std::string Done;
+        static const std::string Error;
     };
 };
 

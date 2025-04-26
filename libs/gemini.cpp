@@ -81,10 +81,16 @@ bool gemini::jsonTextImg(const std::string &prompt, const std::string &mime_type
         if (full_response["candidates"][0].contains("content") &&
             full_response["candidates"][0]["content"].contains("parts") &&
             !full_response["candidates"][0]["content"]["parts"].empty() &&
-            full_response["candidates"][0]["content"]["parts"][0].contains("text"))
+            full_response["candidates"][0]["content"]["parts"][0].contains("text") &&
+            full_response["candidates"][0]["content"]["parts"][0]["text"].is_string())
         {
-
-            res_json = full_response["candidates"][0]["content"]["parts"][0]["text"];
+            auto& correct_resp = full_response["candidates"][0]["content"]["parts"][0]["text"];
+            if(!nlohmann::json::accept(correct_resp.get<std::string>()))
+            {
+                res_json = {{"function_error", "if(!nlohmann::json::accept(correct_resp.get<std::string>()))"}};
+                LOG_ERROR(res_json.dump());
+            }
+            res_json = nlohmann::json::parse(correct_resp.get<std::string>());
             cleanup();
             return true;
         }

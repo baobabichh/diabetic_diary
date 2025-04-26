@@ -58,6 +58,8 @@ void AuthenticatorController::register_user(const HttpRequestPtr &req, std::func
 
 void AuthenticatorController::login_user(const HttpRequestPtr &req, std::function<void(const HttpResponsePtr &)> &&callback) const
 {
+    LOG_INFO("login");
+
     const std::string &email = req->getParameter("email");
     const std::string &password = req->getParameter("password");
 
