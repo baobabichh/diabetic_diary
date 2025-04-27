@@ -150,6 +150,7 @@ void FoodRecognitionController::recognize_food(const HttpRequestPtr &req, std::f
 
 void FoodRecognitionController::edit_result(const HttpRequestPtr &req, std::function<void(const HttpResponsePtr &)> &&callback) const
 {
+    LOG_INFO("here");
     const auto user_identity = getUserIdentity(req);
     if (!user_identity.isCorrect())
     {
@@ -161,6 +162,8 @@ void FoodRecognitionController::edit_result(const HttpRequestPtr &req, std::func
 
     const std::string req_id = req->getParameter("request_id");
     const std::string new_json_str = req->getParameter("new_json");
+    LOG_INFO("new_json_str: " + new_json_str);
+
     if (req_id.empty() || stringToSizeT(req_id) <= 0)
     {
         responseWithErrorMsg(callback, "request_id is empty.");
