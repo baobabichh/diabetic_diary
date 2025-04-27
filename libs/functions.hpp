@@ -455,3 +455,30 @@ inline std::string ext_of_mime_type(const std::string& mime_type)
 
     return copy_str;
 }
+
+
+inline bool isFloat(const std::string& str)
+{
+    try
+    {
+        std::stof(str);
+        return true;
+    }
+    catch(...)
+    {
+        return false;
+    }
+    
+}
+
+inline float stringToFloat(const std::string& str)
+{
+    try
+    {
+        return std::stof(str);
+    }
+    catch(...)
+    {
+        return 0.f;
+    }
+}

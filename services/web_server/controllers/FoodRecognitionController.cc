@@ -148,6 +148,55 @@ void FoodRecognitionController::recognize_food(const HttpRequestPtr &req, std::f
     return;
 }
 
+void FoodRecognitionController::edit_result(const HttpRequestPtr &req, std::function<void(const HttpResponsePtr &)> &&callback) const
+{
+    const auto user_identity = getUserIdentity(req);
+    if (!user_identity.isCorrect())
+    {
+        responseWithNotLoggedIn(callback);
+        return;
+    }
+
+    auto client = drogon::app().getDbClient("dd");
+
+    const std::string req_id = req->getParameter("request_id");
+    const std::string new_json_str = req->getParameter("new_json");
+    if (req_id.empty() || stringToSizeT(req_id) <= 0)
+    {
+        responseWithErrorMsg(callback, "request_id is empty.");
+        return;
+    }
+
+    if (new_json_str.empty())
+    {
+        responseWithErrorMsg(callback, "new_json is empty.");
+        return;
+    }
+
+    if (!nlohmann::json::accept(new_json_str))
+    {
+        responseWithErrorMsg(callback, "new_json is not complete json.");
+        return;
+    }
+
+    nlohmann::json new_json = nlohmann::json::parse(new_json_str);
+
+    try
+    {
+        static const std::string query = "update FoodRecognitions set ResultJson = ? where id = ?";
+        const auto result = client->execSqlSync(query, new_json.dump(), req_id);
+
+        responseWithSuccess(callback, "{}");
+        return;
+    }
+    catch (const drogon::orm::DrogonDbException &e)
+    {
+        LOG_ERROR(e.base().what());
+        responseWithErrorMsg(callback, "Internal server error.");
+        return;
+    }
+}
+
 void FoodRecognitionController::get_status(const HttpRequestPtr & req, std::function<void(const HttpResponsePtr&)>&& callback) const
 {
     const auto user_identity = getUserIdentity(req);
