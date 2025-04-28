@@ -232,11 +232,51 @@ void AuthenticatorController::get_records_by_ids(const HttpRequestPtr &req, std:
         return;
     }
 
-    const std::string& ids_str = req->getParameter("ids");
-    if(ids_str.empty())
+    std::vector<size_t> ids_int_vec{};
     {
-        responseWithErrorMsg(callback, "ids is empty.");
-        return;
+        const std::string& ids_str = req->getParameter("ids");
+        if(ids_str.empty())
+        {
+            responseWithErrorMsg(callback, "ids is empty.");
+            return;
+        }
+
+        auto ids_vec = split_trim(ids_str, ",");
+        if(ids_vec.empty())
+        {
+            ids_vec.push_back(ids_str);
+        }
+
+        if(ids_vec.empty())
+        {
+            responseWithErrorMsg(callback, "ids is empty.");
+            return;
+        }
+        
+        for(auto& id : ids_vec)
+        {
+            const auto id_int = stringToSizeT(id);
+            if(id_int)
+            {
+                ids_int_vec.push_back(id_int);
+            }
+        }
+
+        if(ids_int_vec.empty())
+        {
+            responseWithErrorMsg(callback, "ids is empty.");
+            return;
+        }
+    }
+
+    std::string ids_int_str{};
+    for(auto id_int : ids_int_vec)
+    {
+        if(ids_int_str.size())
+        {
+            ids_int_str += ",";
+        }
+        ids_int_str += std::to_string(id_int);
     }
 
     auto client = drogon::app().getDbClient("dd");
@@ -245,7 +285,9 @@ void AuthenticatorController::get_records_by_ids(const HttpRequestPtr &req, std:
     {
         nlohmann::json res_json = nlohmann::json::array();
 
-        const std::string query = "select * from Records where UserID = ? and ID in (" + ids_str + ")";
+        std::unordered_map<size_t, nlohmann::json> id_to_obj{};
+
+        const std::string query = "select * from Records where UserID = ? and ID in (" + ids_int_str + ")";
         const auto result = client->execSqlSync(query, std::to_string(user_identity.id));
         for(auto& res : result)
         {
@@ -261,8 +303,19 @@ void AuthenticatorController::get_records_by_ids(const HttpRequestPtr &req, std:
             tmp_obj["PersonalCoefficient"] = res["PersonalCoefficient"].as<std::string>();
             tmp_obj["CreateTS"] = res["CreateTS"].as<std::string>();
 
+            const size_t obj_id_int = stringToSizeT(res["ID"].as<std::string>());
+            if(obj_id_int)
+            {
+                id_to_obj[obj_id_int] = tmp_obj;
+            }
+        }
 
-            res_json.push_back(tmp_obj);
+        for(const auto id_int : ids_int_vec)
+        {
+            if(id_to_obj.count(id_int))
+            {
+                res_json.push_back(id_to_obj[id_int]);
+            }
         }
 
         responseWithSuccess(callback, res_json);

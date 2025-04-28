@@ -163,6 +163,46 @@ int main(int argc, char *argv[])
                             return;
                         }
 
+                        const auto get_float_smart = [](const nlohmann::json& obj, const std::string& key) -> std::optional<float>
+                        {
+                            float res{0.0f};
+                            if(obj.count(key) && obj[key].is_number_float())
+                            {
+                                res = obj[key].get<float>();
+                            }
+                            else if(obj.count(key) && obj[key].is_string())
+                            {
+                                res = stringToFloat(obj[key].get<std::string>());
+                            }
+                            else if(obj.count(key) && obj[key].is_number())
+                            {
+                                res = obj[key].get<int>();
+                            }
+                            else
+                            {
+                                return std::nullopt;
+                            }
+                            return res;
+                        };
+
+                        if(res_json.count("products") && res_json["products"].is_array())
+                        {
+                            for(auto& product : res_json["products"])
+                            {   
+                                auto carbs_opt = get_float_smart(product, "carbs");
+                                auto grams_opt = get_float_smart(product, "grams");
+
+                                if(grams_opt.value() <= 0.0001f || carbs_opt.value() <= 0.0001f)
+                                {
+                                    product["ratio"] = float{0};
+                                }
+                                else
+                                {
+                                    product["ratio"] = float{carbs_opt.value() / grams_opt.value() * 100.0f};
+                                }
+                            }
+                        }
+
                         {
                             sql::PreparedStatement *pstmt{nullptr};
                             sql::ResultSet *res{nullptr};

@@ -111,9 +111,9 @@ inline std::vector<uint8_t> getFileAsStringVecU8(const std::string &path)
     std::string res_str = getFileAsString(path);
     std::vector<uint8_t> res_vec{};
     res_vec.reserve(res_str.size());
-    for(auto c : res_str)
+    for (auto c : res_str)
     {
-        res_vec.push_back((uint8_t)c); 
+        res_vec.push_back((uint8_t)c);
     }
 
     return res_vec;
@@ -228,18 +228,17 @@ public:
             }
         }
 
-
         try
         {
             std::filesystem::create_directories(getCfgValue("photos_storage_absolute_path"));
         }
-        catch(const std::exception& e)
+        catch (const std::exception &e)
         {
             LOG_ERROR("failed to create photos_storage_absolute_path: " + getCfgValue("photos_storage_absolute_path"));
             LOG_ERROR(e.what());
             return false;
         }
-        
+
         return true;
     }
 
@@ -402,8 +401,7 @@ struct MimeTypeAndBase64
     }
 };
 
-inline static const std::unordered_set<std::string> supported_mime_types
-{
+inline static const std::unordered_set<std::string> supported_mime_types{
     "image/jpeg",
     "image/png",
     "image/jpg",
@@ -429,7 +427,7 @@ inline MimeTypeAndBase64 image_to_base64_data_uri(const std::string &image_path)
         mime_type = "image/jpg";
     }
 
-    if(!supported_mime_types.count(mime_type))
+    if (!supported_mime_types.count(mime_type))
     {
         return {};
     }
@@ -437,15 +435,15 @@ inline MimeTypeAndBase64 image_to_base64_data_uri(const std::string &image_path)
     return MimeTypeAndBase64{mime_type, base64_string};
 }
 
-inline std::string ext_of_mime_type(const std::string& mime_type)
+inline std::string ext_of_mime_type(const std::string &mime_type)
 {
-    if(!supported_mime_types.count(mime_type))
+    if (!supported_mime_types.count(mime_type))
     {
         return {};
     }
 
     const auto img_post = mime_type.find("image/");
-    if(img_post == std::string::npos)
+    if (img_post == std::string::npos)
     {
         return {};
     }
@@ -456,29 +454,75 @@ inline std::string ext_of_mime_type(const std::string& mime_type)
     return copy_str;
 }
 
-
-inline bool isFloat(const std::string& str)
+inline bool isFloat(const std::string &str)
 {
     try
     {
         std::stof(str);
         return true;
     }
-    catch(...)
+    catch (...)
     {
         return false;
     }
-    
 }
 
-inline float stringToFloat(const std::string& str)
+inline float stringToFloat(const std::string &str)
 {
     try
     {
         return std::stof(str);
     }
-    catch(...)
+    catch (...)
     {
         return 0.f;
     }
+}
+
+inline std::vector<std::string> split(const std::string &str, const std::string &delimiter)
+{
+    std::vector<std::string> tokens;
+    size_t prev = 0, pos = 0;
+
+    while ((pos = str.find(delimiter, prev)) != std::string::npos)
+    {
+        tokens.push_back(str.substr(prev, pos - prev));
+        prev = pos + delimiter.length();
+    }
+
+    tokens.push_back(str.substr(prev));
+
+    return tokens;
+}
+
+inline std::string trim(const std::string &str)
+{
+    auto start = str.begin();
+    while (start != str.end() && std::isspace(*start))
+    {
+        start++;
+    }
+
+    if (start == str.end())
+    {
+        return "";
+    }
+
+    auto end = str.end() - 1;
+    while (end > start && std::isspace(*end))
+    {
+        end--;
+    }
+
+    return std::string(start, end + 1);
+}
+
+inline std::vector<std::string> split_trim(const std::string &str, const std::string &delimiter)
+{
+    auto res = split(str, delimiter);
+    for(auto& res_it : res)
+    {
+        res_it = trim(res_it);
+    }
+    return res;
 }
