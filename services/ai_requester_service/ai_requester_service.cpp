@@ -3,6 +3,7 @@
 #include <string>
 #include "functions.hpp"
 #include "gemini.hpp"
+#include "openai.hpp"
 
 #include <mysql_driver.h>
 #include <mysql_connection.h>
@@ -156,7 +157,7 @@ int main(int argc, char *argv[])
                         }
 
                         nlohmann::json res_json{};
-                        if (!gemini::jsonTextImg(prompt, mime_and_base64.mime_type, mime_and_base64.base64_string, nutrition_schema, res_json))
+                        if (!openai::jsonTextImg("gpt-4o", prompt, mime_and_base64.mime_type, mime_and_base64.base64_string, nutrition_schema, res_json))
                         {
                             LOG_ERROR("if (!gemini::jsonTextImg(prompt, mime_and_base64.mime_type, mime_and_base64.base64_string, nutrition_schema, res_json))");
                             channel->BasicReject(envelope, true);
