@@ -43,31 +43,6 @@ int main(int argc, char *argv[])
     con = driver->connect("127.0.0.1:3306", db_user, db_pass);
     con->setSchema("dd");
 
-    static const nlohmann::json nutrition_schema = {
-        {"type", "object"},
-        {"properties", {{"products", {{"type", "array"}, {"items", {{"type", "object"}, {"properties", {{"name", {{"type", "string"}, {"description", "Exact food name identified in the image"}}}, {"grams", {{"type", "integer"}, {"description", "Detected weight in grams"}}}, {"carbs", {{"type", "integer"}, {"description", "Calculated total carbohydrates rounded to the nearest integer"}}}}}, {"required", {"name", "grams", "carbs"}}}}}}}},
-        {"required", {"products"}}};
-
-    static const std::string prompt =
-        R"(You are a nutrition‐analysis assistant. Given any input image of foods:
-
-1. Detect every unique food item and its weight in grams.
-2. Use surrounding and image depth to determine amount of products.
-3. Split products to the smallest parts.
-4. For each item, retrieve the standard carbohydrate content per 100 g from a reliable nutrition database. 
-5. Calculate the total carbohydrates for each item as.
-6. Output ONLY valid JSON in the following format:
-
-{
-  "products": [
-    {
-      "name":    "<exact food name>",
-      "grams":   <detected weight in grams as an integer>,
-      "carbs":   <calculated total carbohydrates rounded to the nearest integer>
-    }
-  ]
-})";
-
     try
     {
         const std::string hostname = "localhost";
@@ -157,9 +132,9 @@ int main(int argc, char *argv[])
                         }
 
                         nlohmann::json res_json{};
-                        if (!openai::jsonTextImg("gpt-4o", prompt, mime_and_base64.mime_type, mime_and_base64.base64_string, nutrition_schema, res_json))
+                        if (!openai::jsonTextImg("gpt-4o", Prompts::prompt, mime_and_base64.mime_type, mime_and_base64.base64_string, Prompts::nutrition_schema, res_json))
                         {
-                            LOG_ERROR("if (!gemini::jsonTextImg(prompt, mime_and_base64.mime_type, mime_and_base64.base64_string, nutrition_schema, res_json))");
+                            LOG_ERROR("if (!gemini::jsonTextImg(Prompts::prompt, mime_and_base64.mime_type, mime_and_base64.base64_string, Prompts::nutrition_schema, res_json))");
                             channel->BasicReject(envelope, true);
                             return;
                         }

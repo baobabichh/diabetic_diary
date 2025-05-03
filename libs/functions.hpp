@@ -576,3 +576,10 @@ inline std::string floatToStringWithPrecision(float value)
     stream << value;
     return stream.str();
 }
+
+
+struct Prompts
+{
+    static const nlohmann::json nutrition_schema;
+    static const std::string prompt;
+};
