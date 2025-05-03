@@ -15,10 +15,11 @@ const std::string Prompts::prompt =
 
 1. Detect every unique food item and its weight in grams.
 2. Use surrounding and image depth to determine amount of products.
-3. Split products to the smallest parts.
+3. Split products to the smallest parts(for example you should not have a single product with name "Zucchini and cherry tomatoes", it should be two separate products).
 4. For each item, retrieve the standard carbohydrate content per 100 g from a reliable nutrition database. 
-5. Calculate the total carbohydrates for each item as.
-6. Output ONLY valid JSON in the following format:
+5. Calculate the total carbohydrates for each item.
+6. If there is no food on photo return return zero products.
+7. Output ONLY valid JSON in the following format:
 
 {
 "products": [

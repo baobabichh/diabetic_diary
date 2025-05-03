@@ -42,8 +42,17 @@ int main()
 
     LOG_INFO("image_files: " + std::to_string(image_files.size()));
 
+    const bool only_not_food = true;
     for (const auto &image_file : image_files)
     {
+        if(only_not_food)
+        {
+            if(image_file.string().find("not_food") == std::string::npos)
+            {
+                continue;
+            }
+        }
+
         const auto mime_and_base64 = image_to_base64_data_uri(image_file);
         if (mime_and_base64.base64_string.empty() || mime_and_base64.mime_type.empty())
         {
@@ -60,7 +69,6 @@ int main()
                 "gpt-4o-mini",
                 "gpt-4.1",
                 "gpt-4.1-mini",
-                "o4-mini",
             };
 
             for(const auto& model : models)

@@ -24,7 +24,6 @@ int main()
         "gpt-4o-mini",
         "gpt-4.1",
         "gpt-4.1-mini",
-        "o4-mini",
         "gemini-2.0-flash",
         "gemini-2.0-flash-lite",
         "gemini-1.5-flash",

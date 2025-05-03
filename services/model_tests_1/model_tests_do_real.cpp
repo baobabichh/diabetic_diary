@@ -66,8 +66,19 @@ int main()
         return res;
     };
 
+    const bool only_not_food = true;
     for (const auto &image_file : image_files)
     {
+        const bool is_food = image_file.string().find("not_food") == std::string::npos;
+
+        if(only_not_food)
+        {
+            if(is_food)
+            {
+                continue;
+            }
+        }
+
         std::string folder_path = results_folder + "/" + model;
         std::string res_file_path = folder_path + "/" + image_file.filename().string() + ".json";
         std::string true_result_file_path = true_results_floder + "/" + image_file.filename().string() + ".txt";
@@ -108,21 +119,28 @@ int main()
             }
         }
 
-        if (total_carbs > 0)
+        if(is_food)
         {
-            int max_diff = total_carbs % 20 + 5;
-
-            int rand_val{};
-            if (max_diff)
+            if (total_carbs > 0)
             {
-                rand_val = rand() % max_diff;
-            }
-            if (rand() % 2)
-            {
-                rand_val *= -1;
-            }
+                int max_diff = total_carbs % 20 + 5;
 
-            total_carbs += rand_val;
+                int rand_val{};
+                if (max_diff)
+                {
+                    rand_val = rand() % max_diff;
+                }
+                if (rand() % 2)
+                {
+                    rand_val *= -1;
+                }
+
+                total_carbs += rand_val;
+            }
+        }
+        else
+        {
+            total_carbs = 0;
         }
 
         std::ofstream file{true_result_file_path};
