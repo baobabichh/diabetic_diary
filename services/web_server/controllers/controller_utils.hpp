@@ -90,18 +90,6 @@ inline UserIdentity getUserIdentity(const HttpRequestPtr &req)
     }
 }
 
-inline size_t stringToSizeT(const std::string &str)
-{
-    try
-    {
-        return std::stoull(str);
-    }
-    catch (...)
-    {
-        return 0;
-    }
-}
-
 class RabbitMqPublisher
 {
 public:

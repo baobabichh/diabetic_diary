@@ -82,6 +82,8 @@
         "source_location": "cpp",
         "cfenv": "cpp",
         "typeindex": "cpp",
-        "*.ipp": "cpp"
+        "*.ipp": "cpp",
+        "filesystem": "cpp",
+        "stdfloat": "cpp"
     }
 }

@@ -14,6 +14,8 @@ set(SOURCES
     functions.hpp
     gemini.cpp
     gemini.hpp
+    openai.cpp
+    openai.hpp
 )
 
 add_library(mysharedlib SHARED ${SOURCES})

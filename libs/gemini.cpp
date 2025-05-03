@@ -8,7 +8,7 @@ static size_t WriteCallback(void *contents, size_t size, size_t nmemb, std::stri
     return total_size;
 }
 
-bool gemini::jsonTextImg(const std::string &prompt, const std::string &mime_type, const std::string &base64_image, const nlohmann::json &response_schema, nlohmann::json &res_json)
+bool gemini::jsonTextImg(const std::string& model_type, const std::string &prompt, const std::string &mime_type, const std::string &base64_image, const nlohmann::json &response_schema, nlohmann::json &res_json)
 {
     const std::string api_key = Cfg::getInstance().getCfgValue("gemini_api_key");
 
@@ -35,7 +35,7 @@ bool gemini::jsonTextImg(const std::string &prompt, const std::string &mime_type
         return false;
     }
 
-    std::string url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + api_key;
+    std::string url = "https://generativelanguage.googleapis.com/v1beta/models/" + model_type + ":generateContent?key=" + api_key;
     
     nlohmann::json generation_config = {
         {"response_mime_type", "application/json"},

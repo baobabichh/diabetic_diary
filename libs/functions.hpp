@@ -520,9 +520,59 @@ inline std::string trim(const std::string &str)
 inline std::vector<std::string> split_trim(const std::string &str, const std::string &delimiter)
 {
     auto res = split(str, delimiter);
-    for(auto& res_it : res)
+    for (auto &res_it : res)
     {
         res_it = trim(res_it);
     }
     return res;
+}
+
+inline size_t stringToSizeT(const std::string &str)
+{
+    try
+    {
+        return std::stoull(str);
+    }
+    catch (...)
+    {
+        return 0;
+    }
+}
+
+inline float calculateAccuracy(float trueValue, float calculatedValue)
+{
+    float difference = trueValue - calculatedValue;
+    float difference_abs = std::abs(difference);
+
+    if (difference_abs < 10.0f)
+    {
+        return 100.0f;
+    }
+
+    float minus_smt{10.0f};
+    if (difference <= 0.0f)
+    {
+        minus_smt *= -1;
+    }
+
+    trueValue += minus_smt;
+
+    float relativeError = std::abs((trueValue - calculatedValue) / trueValue);
+
+    float accuracyPercentage = (1.0f - relativeError) * 100.0f;
+
+    if (accuracyPercentage < 0.0f)
+    {
+        accuracyPercentage = 0.0f;
+    }
+
+    return accuracyPercentage;
+}
+
+inline std::string floatToStringWithPrecision(float value)
+{
+    std::stringstream stream;
+    stream << std::fixed << std::setprecision(2);
+    stream << value;
+    return stream.str();
 }
