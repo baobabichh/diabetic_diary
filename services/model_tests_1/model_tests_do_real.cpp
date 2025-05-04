@@ -66,7 +66,7 @@ int main()
         return res;
     };
 
-    const bool only_not_food = true;
+    const bool only_not_food = false;
     for (const auto &image_file : image_files)
     {
         const bool is_food = image_file.string().find("not_food") == std::string::npos;

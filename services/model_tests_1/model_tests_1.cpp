@@ -42,7 +42,7 @@ int main()
 
     LOG_INFO("image_files: " + std::to_string(image_files.size()));
 
-    const bool only_not_food = true;
+    const bool only_not_food = false;
     for (const auto &image_file : image_files)
     {
         if(only_not_food)
