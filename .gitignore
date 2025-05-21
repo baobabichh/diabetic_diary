@@ -1,3 +1,4 @@
 build/
 credentials.json
 photos_storage/
+*.log
