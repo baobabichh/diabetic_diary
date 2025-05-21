@@ -26,6 +26,7 @@ int main()
         drogon::app().addDbClient(cfg);
     }
 
+    drogon::app().setClientMaxBodySize(20 * 1024 * 1024);
     drogon::app().addListener("0.0.0.0", 5050);
     drogon::app().run();
     return 0;

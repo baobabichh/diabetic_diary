@@ -21,6 +21,13 @@ sudo apt-get install -y libmariadb-dev-compat libmariadb-dev
 sudo apt-get update -y
 sudo apt-get upgrade -y
 
+sudo apt install -y mysql-server
+sudo apt update -y
+sudo apt upgrade -y
+
+sudo service mysql restart
+sudo systemctl restart mysql.service
+
 sudo apt-get install -y drogon
 sudo apt-get update -y
 sudo apt-get upgrade -y
