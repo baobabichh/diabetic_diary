@@ -404,7 +404,6 @@ struct MimeTypeAndBase64
 inline static const std::unordered_set<std::string> supported_mime_types{
     "image/jpeg",
     "image/png",
-    "image/jpg",
 };
 
 inline MimeTypeAndBase64 image_to_base64_data_uri(const std::string &image_path)
@@ -424,7 +423,7 @@ inline MimeTypeAndBase64 image_to_base64_data_uri(const std::string &image_path)
     }
     else if (ext == "jpg")
     {
-        mime_type = "image/jpg";
+        mime_type = "image/jpeg";
     }
 
     if (!supported_mime_types.count(mime_type))

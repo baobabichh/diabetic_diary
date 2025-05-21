@@ -59,6 +59,7 @@ int main(int argc, char *argv[])
             AmqpClient::Envelope::ptr_t envelope = channel->BasicConsumeMessage(consumer_tag);
             if (envelope)
             {
+                LOG_INFO("PROCESSING");
                 [&]()
                 {
                     AmqpClient::BasicMessage::ptr_t message = envelope->Message();

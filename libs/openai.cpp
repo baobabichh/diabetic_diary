@@ -68,7 +68,6 @@ bool openai::jsonTextImg(const std::string& model_type, const std::string &promp
     nlohmann::json request_json = {
         {"model", model_type},
         {"messages", messages},
-        {"max_tokens", 1000},
         {"response_format", {{"type", "json_object"}}}
     };
 
@@ -133,5 +132,6 @@ bool openai::jsonTextImg(const std::string& model_type, const std::string &promp
     cleanup();
     res_json = {{"function_error", "Could not parse structured JSON from OpenAI response"}};
     LOG_ERROR(res_json.dump());
+    LOG_ERROR(full_response.dump());
     return false;
 }

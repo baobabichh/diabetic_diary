@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <cstdlib>
 #include <ctime>
+#include <thread>
 
 namespace fs = std::filesystem;
 
@@ -69,10 +70,12 @@ int main()
                 "gpt-4o-mini",
                 "gpt-4.1",
                 "gpt-4.1-mini",
+                "o4-mini",
             };
 
             for(const auto& model : models)
             {
+                // std::this_thread::sleep_for(std::chrono::seconds{1});
                 std::string folder_path = results_folder + "/" + model;
                 std::string res_file_path = folder_path + "/" + image_file.filename().string() + ".json";
                 LOG_INFO("Processing: " + res_file_path);
@@ -80,15 +83,23 @@ int main()
                 fs::create_directories(folder_path);
                 
                 std::chrono::time_point start_point = std::chrono::system_clock::now();
+                std::chrono::time_point end_point = std::chrono::system_clock::now();
 
                 nlohmann::json res_json{};
-                if (!openai::jsonTextImg(model, Prompts::prompt, mime_and_base64.mime_type, mime_and_base64.base64_string, Prompts::nutrition_schema, res_json))
+                bool sucuess{false};
+                while(!sucuess)
                 {
-                    LOG_ERROR("if (!openai::jsonTextImg(Prompts::prompt, mime_and_base64.mime_type, mime_and_base64.base64_string, Prompts::nutrition_schema, res_json))");
-                    continue;
+                    // std::this_thread::sleep_for(std::chrono::seconds{1});
+                    start_point = std::chrono::system_clock::now();
+                    if (!openai::jsonTextImg(model, Prompts::prompt, mime_and_base64.mime_type, mime_and_base64.base64_string, Prompts::nutrition_schema, res_json))
+                    {
+                        LOG_ERROR("if (!openai::jsonTextImg(Prompts::prompt, mime_and_base64.mime_type, mime_and_base64.base64_string, Prompts::nutrition_schema, res_json))");
+                        continue;
+                    }
+                    sucuess = true;
+                    end_point = std::chrono::system_clock::now();
                 }
-
-                std::chrono::time_point end_point = std::chrono::system_clock::now();
+                
 
                 res_json["time_spent"] = std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end_point - start_point).count());
 
@@ -109,10 +120,13 @@ int main()
                 "gemini-2.0-flash-lite",
                 "gemini-1.5-flash",
                 "gemini-2.0-flash-exp",
+                "gemini-2.5-flash-preview-05-20",
+                "gemini-2.5-pro-preview-05-06",
             };
 
             for(const auto& model : models)
             {
+                // std::this_thread::sleep_for(std::chrono::seconds{1});
                 std::string folder_path = results_folder + "/" + model;
                 std::string res_file_path = folder_path + "/" + image_file.filename().string() + ".json";
                 LOG_INFO("Processing: " + res_file_path);
@@ -120,15 +134,23 @@ int main()
                 fs::create_directories(folder_path);
                 
                 std::chrono::time_point start_point = std::chrono::system_clock::now();
+                std::chrono::time_point end_point = std::chrono::system_clock::now();
 
                 nlohmann::json res_json{};
-                if (!gemini::jsonTextImg(model, Prompts::prompt, mime_and_base64.mime_type, mime_and_base64.base64_string, Prompts::nutrition_schema, res_json))
-                {
-                    LOG_ERROR("if (!gemini::jsonTextImg(Prompts::prompt, mime_and_base64.mime_type, mime_and_base64.base64_string, Prompts::nutrition_schema, res_json))");
-                    continue;
-                }
 
-                std::chrono::time_point end_point = std::chrono::system_clock::now();
+                bool sucuess{false};
+                while(!sucuess)
+                {
+                    // std::this_thread::sleep_for(std::chrono::seconds{1});
+                    start_point = std::chrono::system_clock::now();
+                    if (!gemini::jsonTextImg(model, Prompts::prompt, mime_and_base64.mime_type, mime_and_base64.base64_string, Prompts::nutrition_schema, res_json))
+                    {
+                        LOG_ERROR("if (!gemini::jsonTextImg(Prompts::prompt, mime_and_base64.mime_type, mime_and_base64.base64_string, Prompts::nutrition_schema, res_json))");
+                        continue;
+                    }
+                    sucuess = true;
+                    end_point = std::chrono::system_clock::now();
+                }
 
                 res_json["time_spent"] = std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end_point - start_point).count());
 
