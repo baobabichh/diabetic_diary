@@ -19,7 +19,7 @@ int main()
     static const std::string dataset_folder{"../dataset"};
     static const std::string true_results_floder{"../true_results"};
     static const std::string results_folder{"../results"};
-    static const std::string model{"gpt-4o"};
+    static const std::string model{"gemini-2.5-pro-preview-05-06"};
 
     fs::create_directories(dataset_folder);
     fs::create_directories(true_results_floder);
@@ -123,7 +123,7 @@ int main()
         {
             if (total_carbs > 0)
             {
-                int max_diff = total_carbs % 20 + 5;
+                int max_diff = total_carbs % 15 + 5;
 
                 int rand_val{};
                 if (max_diff)
