@@ -105,6 +105,7 @@ bool gemini::jsonTextImg(const std::string& model_type, const std::string &promp
         cleanup();
         res_json = {{"function_error", "No candidates in response"}};
         LOG_ERROR(res_json.dump());
+        LOG_ERROR(full_response.dump());
         return false;
     }
 

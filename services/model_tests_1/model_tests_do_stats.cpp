@@ -24,10 +24,13 @@ int main()
         "gpt-4o-mini",
         "gpt-4.1",
         "gpt-4.1-mini",
+        "o4-mini",
         "gemini-2.0-flash",
         "gemini-2.0-flash-lite",
         "gemini-1.5-flash",
         "gemini-2.0-flash-exp",
+        "gemini-2.5-flash-preview-05-20",
+        "gemini-2.5-pro-preview-05-06",
     };
 
     fs::create_directories(dataset_folder);
