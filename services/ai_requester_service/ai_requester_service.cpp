@@ -28,20 +28,7 @@ int main(int argc, char *argv[])
     const auto photos_folder_path = Cfg::getInstance().getCfgValue("photos_storage_absolute_path");
 
     sql::mysql::MySQL_Driver *driver{nullptr};
-    sql::Connection *con{nullptr};
-
-    const auto con_scope_exit = makeScopeExit(
-        [&]()
-        {
-            if (con)
-            {
-                delete con;
-            }
-        });
-
     driver = sql::mysql::get_mysql_driver_instance();
-    con = driver->connect("127.0.0.1:3306", db_user, db_pass);
-    con->setSchema("dd");
 
     try
     {
@@ -88,6 +75,7 @@ int main(int argc, char *argv[])
                         {
                             sql::PreparedStatement *pstmt{nullptr};
                             sql::ResultSet *res{nullptr};
+                            sql::Connection *con{nullptr};
 
                             const auto scope_exit = makeScopeExit(
                                 [&]()
@@ -96,7 +84,12 @@ int main(int argc, char *argv[])
                                         delete pstmt;
                                     if (res)
                                         delete res;
+                                    if (con)
+                                        delete con;
                                 });
+                            
+                            con = driver->connect("127.0.0.1:3306", db_user, db_pass);
+                            con->setSchema("dd");
 
                             pstmt = con->prepareStatement("select ImagePath from FoodRecognitions where id = ?");
                             pstmt->setString(1, req_id);
@@ -132,7 +125,7 @@ int main(int argc, char *argv[])
                         }
 
                         nlohmann::json res_json{};
-                        if (!openai::jsonTextImg("gpt-4o", Prompts::prompt, mime_and_base64.mime_type, mime_and_base64.base64_string, Prompts::nutrition_schema, res_json))
+                        if (!gemini::jsonTextImg("gemini-2.0-flash-exp", Prompts::prompt, mime_and_base64.mime_type, mime_and_base64.base64_string, Prompts::nutrition_schema, res_json))
                         {
                             LOG_ERROR("if (!gemini::jsonTextImg(Prompts::prompt, mime_and_base64.mime_type, mime_and_base64.base64_string, Prompts::nutrition_schema, res_json))");
                             channel->BasicReject(envelope, true);
@@ -182,6 +175,7 @@ int main(int argc, char *argv[])
                         {
                             sql::PreparedStatement *pstmt{nullptr};
                             sql::ResultSet *res{nullptr};
+                            sql::Connection *con{nullptr};
 
                             const auto scope_exit = makeScopeExit(
                                 [&]()
@@ -190,7 +184,12 @@ int main(int argc, char *argv[])
                                         delete pstmt;
                                     if (res)
                                         delete res;
+                                    if (con)
+                                        delete con;
                                 });
+                            
+                            con = driver->connect("127.0.0.1:3306", db_user, db_pass);
+                            con->setSchema("dd");
 
                             pstmt = con->prepareStatement("update FoodRecognitions set Status = ?, ResultJson = ? where id = ?");
                             pstmt->setString(1, FoodRecognitions::Status::Done);
